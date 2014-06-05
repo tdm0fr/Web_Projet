@@ -90,7 +90,6 @@ public class Instrument implements Serializable {
         }
         return true;
     }
-
     
     @Override
     public String toString() {

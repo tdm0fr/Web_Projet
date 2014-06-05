@@ -31,6 +31,8 @@ public class Utilisateur implements Serializable {
     private String password;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Adresse adresse;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Abonnement abonnement;
 
     public Utilisateur() {
     }
@@ -90,6 +92,14 @@ public class Utilisateur implements Serializable {
         this.adresse = adresse;
     }
 
+    public Abonnement getAbonnement() {
+        return abonnement;
+    }
+
+    public void setAbonnement(Abonnement abonnement) {
+        this.abonnement = abonnement;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -112,6 +122,6 @@ public class Utilisateur implements Serializable {
 
     @Override
     public String toString() {
-        return "Utilisateur{" + "id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", login=" + login + ", password=" + password + ", adresse=" + adresse + '}';
+        return "Utilisateur{" + "id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", login=" + login + ", password=" + password + ", adresse=" + adresse + ", abonnement=" + abonnement + '}';
     }
 }

@@ -9,24 +9,21 @@ package utilisateurs.modeles;
 import com.sun.istack.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
  *
- * @author naana_on
+ * @author Medhy Salim
  */
 @Entity  
 public class Adresse implements Serializable {  
-    
-      
+ 
     private static final long serialVersionUID = 1L;  
     @Id  
     @GeneratedValue(strategy = GenerationType.AUTO)  
@@ -34,25 +31,13 @@ public class Adresse implements Serializable {
     @NotNull @Size(min=1)  
     private String ville;  
     @Pattern(regexp="[0-9]{5}") // On accepte les codes postaux du type "06410"  
-    private String codePostal;  
-    @OneToOne(mappedBy = "adresse")
-    private Utilisateur utilisateur;
+    private String codePostal;
     @OneToMany(mappedBy = "adresse")
-    private List<Utilisateur> utilisateurs = new ArrayList<>();
-    
-    public void addUtilisateur(Utilisateur u) {  
-        utilisateurs.add(u);  
-    }
-    
-    public void removeUtilisateur(Utilisateur u) {  
-        utilisateurs.remove(u);  
+    private ArrayList<Utilisateur> listeUtilisateurs = new ArrayList<>();
+
+    public Adresse() {
     }  
-    public List<Utilisateur> getUtilisateurs() {  
-        return utilisateurs;  
-    } 
-  
-    public Adresse() {}  
-      
+
     public Adresse(String ville, String codePostal) {  
         this.ville = ville;  
         this.codePostal = codePostal;  
@@ -80,5 +65,44 @@ public class Adresse implements Serializable {
 
     public void setCodePostal(String codePostal) {
         this.codePostal = codePostal;
+    }
+
+    public ArrayList<Utilisateur> getListeUtilisateurs() {
+        return listeUtilisateurs;
+    }
+    
+    public void addUtilisateur(Utilisateur u) {  
+        listeUtilisateurs.add(u);  
+    }
+        
+    public void removeUtilisateur(Utilisateur u) {  
+        listeUtilisateurs.remove(u);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 31 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Adresse other = (Adresse) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Adresse{" + "id=" + id + ", ville=" + ville + ", codePostal=" + codePostal + ", listeUtilisateurs=" + listeUtilisateurs + '}';
     }
 }

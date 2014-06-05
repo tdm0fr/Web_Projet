@@ -7,6 +7,7 @@
 package utilisateurs.modeles;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,36 +16,27 @@ import javax.persistence.ManyToOne;
 
 /**
  *
- * @author naana_on
+ * @author Medhy Salim
  */
+
 @Entity
 public class Instrument implements Serializable {
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne
-    private Musique idmusique;
-    private String nomInstrument;
+    private String nom;
+    private String difficulte;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Musique musique;
 
     public Instrument() {
     }
     
-    public Instrument(final Musique idmusique, final String nomInstrument){
-        this.idmusique = idmusique;
-        this.nomInstrument=nomInstrument;
-    }
-    
-    public Instrument(final String nomInstrument){
-        this.nomInstrument=nomInstrument;
-    }
-
-    public String getNomInstrument() {
-        return nomInstrument;
-    }
-
-    public void setNomInstrument(String nomInstrument) {
-        this.nomInstrument = nomInstrument;
+    public Instrument(String nom, String difficulte){
+        this.nom = nom;
+        this.difficulte = difficulte;
     }
 
     public Long getId() {
@@ -53,6 +45,30 @@ public class Instrument implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getDifficulte() {
+        return difficulte;
+    }
+
+    public void setDifficulte(String difficulte) {
+        this.difficulte = difficulte;
+    }
+
+    public Musique getMusique() {
+        return musique;
+    }
+
+    public void setMusique(Musique musique) {
+        this.musique = musique;
     }
 
     @Override
@@ -75,9 +91,9 @@ public class Instrument implements Serializable {
         return true;
     }
 
+    
     @Override
     public String toString() {
-        return "utilisateurs.modeles.Instrument[ id=" + id + " ]";
+        return "Instrument{" + "id=" + id + ", nom=" + nom + ", difficulte=" + difficulte + ", musique=" + musique + '}';
     }
-    
 }

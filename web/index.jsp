@@ -35,24 +35,30 @@
 
         <c:import url="header.jsp"/>
 
+        <%-- Si on est connecté --%>
         <c:if test="${!empty sessionScope.connecte}"> 
             <c:import url="deconnexion.jsp"/>
+            
+            <c:if test="${param['page'] == 'details'}">
+                <c:import url="details.jsp"/>
+            </c:if>
+
+            <c:if test="${param['page'] == 'musiques'}">
+                <c:import url="musiques.jsp"/>
+            </c:if>
         </c:if>
         
+        <%-- Si on est pas connecté --%>
         <c:if test="${empty sessionScope.connecte}">
             <c:import url="accueil.jsp"/>
-        </c:if>
-        
-        <c:if test="${param['action'] == 'connexion'}">
-            <c:import url="connexion.jsp"/>
-        </c:if>
-        
-        <c:if test="${param['action'] == 'inscription'}">
-            <c:import url="inscription.jsp"/>
-        </c:if>
+            
+            <c:if test="${param['action'] == 'connexion'}">
+                <c:import url="connexion.jsp"/>
+            </c:if>
 
-        <c:if test="${param['action'] == 'details'}">
-            <c:import url="details.jsp"/>
+            <c:if test="${param['action'] == 'inscription'}">
+                <c:import url="inscription.jsp"/>
+            </c:if>
         </c:if>
         
         <c:import url="footer.jsp"/>

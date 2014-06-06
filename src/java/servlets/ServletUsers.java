@@ -40,7 +40,7 @@ public class ServletUsers extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        String page = request.getParameter("page");
+        String page = request.getParameter("p");
         String forwardTo = "";
         String message = "";
         HttpSession session = request.getSession(true);
@@ -81,7 +81,7 @@ public class ServletUsers extends HttpServlet {
                     Collection<Utilisateur> liste = gestionnaireUtilisateurs.getUsersbyPage(Integer.parseInt(page));
                     request.setAttribute("listeDesUsers", liste);
                     request.setAttribute("totalPages", gestionnaireUtilisateurs.getTotalPages());
-                    forwardTo = "index.jsp?action=listerLesUtilisateurs&page=" + page;
+                    forwardTo = "index.jsp?action=listerLesUtilisateurs&p=" + page;
                     message = "Liste des utilisateurs";
                     
                 } else if (action.equals("listerUtilisateursParVille")) {
@@ -100,7 +100,7 @@ public class ServletUsers extends HttpServlet {
                     Collection<Utilisateur> liste = gestionnaireUtilisateurs.getUsersbyPage(1);
                     request.setAttribute("listeDesUsers", liste);
                     request.setAttribute("totalPages", gestionnaireUtilisateurs.getTotalPages());
-                    forwardTo = "index.jsp?action=listerLesUtilisateurs&page=1";
+                    forwardTo = "index.jsp?action=listerLesUtilisateurs&p=1";
                     message = "Liste des utilisateurs";
                 }
                 
@@ -119,12 +119,12 @@ public class ServletUsers extends HttpServlet {
                 String password = request.getParameter("password");
                 Adresse adress = new Adresse(request.getParameter("ville"), request.getParameter("postal"));
                 gestionnaireUtilisateurs.inscription(nom, prenom, login, password, adress);
-                forwardTo = "index.jsp?action=listerLesUtilisateurs&page=" + request.getParameter("page");
+                forwardTo = "index.jsp?action=listerLesUtilisateurs&p=" + request.getParameter("page");
                 message = "L'utilisateur de login " + login + " a été créé";
                 
             } else if (action.equals("supprimer")) {
                 gestionnaireUtilisateurs.deleteUtilisateur(request.getParameter("login"));
-                forwardTo = "index.jsp?action=listerLesUtilisateurs&page=" + request.getParameter("page");
+                forwardTo = "index.jsp?action=listerLesUtilisateurs&p=" + request.getParameter("page");
                 message = "L'utilisateur de login " + request.getParameter("login") + " a été supprimé";
                 
             } else if (action.equals("chercherParLogin")) {

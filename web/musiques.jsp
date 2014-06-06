@@ -1,82 +1,117 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+<%@page contentType="text/html" pageEncoding="UTF-8"%>  
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <title>Vocal | Home</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/font-awesome.min.css" rel="stylesheet">    
-        <link href="css/prettyPhoto.css" rel="stylesheet"> 
-        <link href="css/flexslider.css" rel="stylesheet">
-        <link href="css/sc-player-standard.css" rel="stylesheet">
-            <link href="css/main.css" rel="stylesheet">
-            <link href="css/responsive.css" rel="stylesheet">
-            <link href="css/presets/preset1.css" id="preset" rel="stylesheet" type="text/css">
-            <link href="css/switcher.css" rel="stylesheet" type="text/css">
+<div id="contact-page" class="container">
+    <div class="bg">
+        <div class="row">    		
+            <div class="col-sm-12">
+                <h3>Musiques</h3>
 
-        <!--[if lt IE 9]>
-                <script src="js/html5shiv.js"></script>
-                <script src="js/respond.min.js"></script>
-        <![endif]-->       
-        <link rel="shortcut icon" href="images/ico/favicon.html">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.html">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.html">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.html">
-        <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.html">
-    </head><!--/head-->
-    <body>
+                <!--Recherche : <input id="filter" type="text" value="" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"/> -->
 
-        <c:import url="header.jsp"/>
+                <c:if test="${param['action'] == 'listeMusiques'}" >
+                    <h2 class="heading"></h2>
+                    
+                    <div class="row">
+                        
+                    <c:forEach var="m" items="${requestScope['listeMusiques']}">
+                        
+                        <div class="col-sm-4">
+                            <div class="single-album"
+                                 <img alt="" src="images/album/album1.jpg"></img>
+                            </div>
+                            
+                            <div class="album-heading">
+                                <h3>
+                                    <a href="#">${m.titre}</a>
+                                </h3>
+                                <p>
+                                    <span>${m.artiste.nomArtiste}</span>
+                                </p>
+                            </div>
 
-        <c:if test="${!empty sessionScope.connecte}">
-            <div>
-                <c:import url="content_musiques.jsp"/>
+                        </div>
+
+                        <div class="button">
+                            <a>
+                                <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                                    <input type='hidden' value="0.99" name="amount" />
+                                    <input name="currency_code" type="hidden" value="EUR" />
+                                    <input name="shipping" type="hidden" value="0.00" />
+                                    <input name="tax" type="hidden" value="0.00" />
+                                    <input name="return" type="hidden" value="http://localhost:8080/TP2_Web/success.jsp" />
+                                    <input name="cancel_return" type="hidden" value="http://localhost:8080/TP2_Web/cancelled.jsp" />
+                                    <input name="notify_url" type="hidden" value="" />
+                                    <input name="cmd" type="hidden" value="_xclick" />
+                                    <input name="business" type="hidden" value="grinny_vendeur@mmp.com" />
+                                    <input name="item_name" type="hidden" value="AbonnementWE" />
+                                    <input name="no_note" type="hidden" value="1" />
+                                    <input name="lc" type="hidden" value="FR" />
+                                    <input name="bn" type="hidden" value="PP-BuyNowBF" />
+                                    <input name="custom" type="hidden" value="grinny_acheteur@mmp.com" />
+                                    <input alt="Effectuez vos paiements via PayPal : une solution rapide, gratuite et sécurisée" name="submit" src="https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif" type="image" /><img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
+                                </form>
+                            </a>
+                        </div>
+
+                   </c:forEach>
+                   </div>
+               </c:if>
             </div>
-        </c:if>
+        </div>
+    </div>
+</div>
 
-        <c:import url="footer.jsp"/>
+                <c:if test="${param['action'] == 'listeArtistes'}" >
+                    <div class="content">
+                        <div class="container-fluid no-horizontal-padding">
+                            <div class="articles albums">
+                                <div class="row">
+                                    <c:forEach var="a" items="${requestScope['listeArtistes']}">
+                                        <div class="col-md-3 article">
+                                            <a href="">
+                                                <div class="image">
+                                                    <div class="overlay">
+                                                        <h5>View Details</h5>
+                                                    </div>
+                                                    <img src="images/gallery/thumbnails/1.jpg" alt="">
+                                                </div>
+                                            </a>
+                                            <h3 class="title"><a href="">${a.nomArtiste}</a></h3>
+                                        </div>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </c:if>
 
-        <script type="text/javascript" src="js/jquery.js"></script>
-        <script type="text/javascript" src="js/sc-player.js"></script> 
-        <script type="text/javascript" src="js/soundcloud.player.api.js"></script> 
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/jquery.prettyPhoto.js"></script>
-        <script type="text/javascript" src="js/jquery.fitvids.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
-        <script type="text/javascript" src="js/coundown-timer.js"></script>
-        <script type="text/javascript" src="js/jquery.flexslider.js"></script>
-        <script type="text/javascript" src="js/jquery.backstretch.min.js"></script>
-        <script type="text/javascript" src="js/switcher.js"></script>
-        <script type="text/javascript">
-                jQuery(document).ready(function($){
-                        $(window).load(function() {
-                                // The slider being synced must be initialized first
-                                $('#carousel').flexslider({
-                                        animation: "slide",
-                                        controlNav: false,
-                                        animationLoop: false,
-                                        slideshow: false,
-                                        itemWidth: 41,
-                                        itemMargin: 0,
-                                        asNavFor: '#slider'
-                                });
+                <c:if test="${param['action'] == 'detailsMusique'}" >
 
-                                $('#slider').flexslider({
-                                        directionNav: false,
-                                        animation: "fade",
-                                        controlNav: false,
-                                        animationLoop: false,
-                                        slideshow: false,
-                                        sync: "#carousel"
-                                });
+                    <c:forEach var="a" items="${requestScope['listeInstruments']}">
+                        ${a.nomInstrument}
+                    </c:forEach>
+
+                </c:if>
+
+                <!-- <script> //Script pour la recherche dynamique dans la liste
+                    jQuery.expr[':'].contains = function(a, i, m) {
+                        return jQuery(a).text().toUpperCase()
+                                .indexOf(m[3].toUpperCase()) >= 0;
+                    };
+                    $(document).ready(function() {
+                        $("#filter").focus();
+                        $("#filter").keyup(function() {
+                            str = $(this).val();
+                            if (str == '')
+                                $('div.event div.container div.event_content').css('display', '');
+                            $('div.event div.container div.event_content').css('display', 'none');
+                            $('div.event div.container div.event_content div.title a:contains("' + str + '")').parent().css('display', '');
+                            $('div.event div.container div.event_content div.title div.location span:contains("' + str + '")').parent().css('display', '');
                         });
-                });
-
-        </script>
-
-    </body>
-</html>
+                    });
+                </script> -->
+            </div>
+        </div>
+    </div>
+</div>

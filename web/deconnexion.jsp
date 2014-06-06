@@ -8,7 +8,7 @@
                 <h3>
                     <span id="connect">Bonjour ${login}</span>
                     <span style="float:right;"> <a id="deconnexion" href="ServletUsers?action=deconnexion">Déconnexion</a></span>
-                <h3>
+                </h3>
             </div>
         </div>
     </div>    			

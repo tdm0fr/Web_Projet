@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -26,13 +27,13 @@ public class Musique implements Serializable {
     private int nbPistes;
     @OneToMany(mappedBy = "musique")
     private Collection<Instrument> listeInstruments;
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private Artiste artiste;
+    @ManyToMany
+    private Collection<Artiste> listeArtistes;
     private String genre;
     private int annee;
     private String wikiLink;
     @ManyToOne(cascade = CascadeType.PERSIST)
-    private String album;    
+    private Album album;    
     
     public Musique() {
     }
@@ -80,13 +81,17 @@ public class Musique implements Serializable {
     public void removeInstrument(Instrument i) {  
         listeInstruments.remove(i);  
     }
-    
-    public Artiste getArtiste() {
-        return artiste;
-    }
 
-    public void setArtiste(Artiste artiste) {
-        this.artiste = artiste;
+    public Collection<Artiste> getListeArtistes() {
+        return listeArtistes;
+    }
+    
+    public void addArtiste(Artiste a) {  
+        listeArtistes.add(a);  
+    }
+        
+    public void removeArtiste(Artiste a) {  
+        listeArtistes.remove(a);  
     }
 
     public String getGenre() {
@@ -113,11 +118,11 @@ public class Musique implements Serializable {
         this.wikiLink = wikiLink;
     }
 
-    public String getAlbum() {
+    public Album getAlbum() {
         return album;
     }
 
-    public void setAlbum(String album) {
+    public void setAlbum(Album album) {
         this.album = album;
     }
 
@@ -143,6 +148,6 @@ public class Musique implements Serializable {
 
     @Override
     public String toString() {
-        return "Musique{" + "id=" + id + ", titre=" + titre + ", nbPistes=" + nbPistes + ", listeInstruments=" + listeInstruments + ", artiste=" + artiste + ", genre=" + genre + ", annee=" + annee + ", wikiLink=" + wikiLink + ", album=" + album + '}';
+        return "Musique{" + "id=" + id + ", titre=" + titre + ", nbPistes=" + nbPistes + ", listeInstruments=" + listeInstruments + ", listeArtistes=" + listeArtistes + ", genre=" + genre + ", annee=" + annee + ", wikiLink=" + wikiLink + ", album=" + album + '}';
     }
 }

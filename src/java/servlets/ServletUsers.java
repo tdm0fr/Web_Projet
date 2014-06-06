@@ -48,7 +48,9 @@ public class ServletUsers extends HttpServlet {
         
         if (action != null) {
             if (action.equals("authentifier")) {
+                System.out.println("**************************************************");
                 Utilisateur u = gestionnaireUtilisateurs.getUserByLogin(request.getParameter("login"));
+                System.out.println(u.toString());
                 if (u != null) {
                     if (u.getPassword().equals(request.getParameter("password"))) {
                         session.setAttribute("login", request.getParameter("login"));

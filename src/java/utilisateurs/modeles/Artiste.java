@@ -29,9 +29,9 @@ public class Artiste implements Serializable {
     private String nom;
     private String resume;
     private String photoURL;
-    @ManyToMany(mappedBy = "artiste")
+    @ManyToMany(mappedBy = "listeArtistes")
     private Collection<Musique> listeMusiques;
-    @ManyToMany(mappedBy = "albums")
+    @ManyToMany(mappedBy = "listeArtistes")
     private Collection<Album> listeAlbums;
 
     public Artiste() {

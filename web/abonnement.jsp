@@ -1,59 +1,231 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
-    "http://www.w3.org/TR/html4/loose.dtd">  
-<!DOCTYPE html>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>  
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+               
+<div id="contact-page" class="container">
+    <div class="bg">
+            <div class="row">    		
+                <div class="col-sm-12">    			   			
+                    <h2 class="heading">Abonnez-vous !</h2>    			    				    				
+                </div>
+            </div>			 		
 
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+            <div class="row">  	
+                <div class="col-sm-12">    			   			
+                    <h2 class="heading"><a href="#">Abonnement week-end - 2€</a></h2>    
+                    <span>Abonnez-vous juste pour vos week-ends et profitez-en pendant vos soirées !</span>
+            </div>                
+            <div class="button">
+                <a href="ServletUsers?action=abonnementWE" class="">
+                    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                        <input type='hidden' value="2" name="amount" />
+                        <input name="currency_code" type="hidden" value="EUR" />
+                        <input name="shipping" type="hidden" value="0.00" />
+                        <input name="tax" type="hidden" value="0.00" />
+                        <input name="return" type="hidden" value="http://localhost:8080/TP2_Web/ServletUsers?action=abonnementWE" />
+                        <input name="cancel_return" type="hidden" value="http://localhost:8080/TP2_Web/cancelled.jsp" />
+                        <input name="notify_url" type="hidden" value="" />
+                        <input name="cmd" type="hidden" value="_xclick" />
+                        <input name="business" type="hidden" value="grinny_vendeur@mmp.com" />
+                        <input name="item_name" type="hidden" value="AbonnementWE" />
+                        <input name="no_note" type="hidden" value="1" />
+                        <input name="lc" type="hidden" value="FR" />
+                        <input name="bn" type="hidden" value="PP-BuyNowBF" />
+                        <input name="custom" type="hidden" value="grinny_acheteur@mmp.com" />
+                        <input alt="Effectuez vos paiements via PayPal : une solution rapide, gratuite et sécurisée" name="submit" src="https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif" type="image" />
+                        <img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
+                    </form>
+                </a>
+            </div>    
+                
+                
+                
+                
+<%--                
+                <div class="event">
+                    <div class="container">
+                        <div class="event-content">
+                            <div class="title">
+                                <h3><a href="#">Abonnement week-end - 2€</a></h3>
+                                <div class="location">
+                                    <i></i>
+                                    <span>Abonnez-vous juste pour vos week-ends et profitez-en pendant vos soirées !</span>
+                                </div>
+                            </div>
+                            <div class="button">
+                                <a href="ServletUsers?action=abonnementWE" class="">
+                                    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                                        <input type='hidden' value="2" name="amount" />
+                                        <input name="currency_code" type="hidden" value="EUR" />
+                                        <input name="shipping" type="hidden" value="0.00" />
+                                        <input name="tax" type="hidden" value="0.00" />
+                                        <input name="return" type="hidden" value="http://localhost:8080/TP2_Web/ServletUsers?action=abonnementWE" />
+                                        <input name="cancel_return" type="hidden" value="http://localhost:8080/TP2_Web/cancelled.jsp" />
+                                        <input name="notify_url" type="hidden" value="" />
+                                        <input name="cmd" type="hidden" value="_xclick" />
+                                        <input name="business" type="hidden" value="grinny_vendeur@mmp.com" />
+                                        <input name="item_name" type="hidden" value="AbonnementWE" />
+                                        <input name="no_note" type="hidden" value="1" />
+                                        <input name="lc" type="hidden" value="FR" />
+                                        <input name="bn" type="hidden" value="PP-BuyNowBF" />
+                                        <input name="custom" type="hidden" value="grinny_acheteur@mmp.com" />
+                                        <input alt="Effectuez vos paiements via PayPal : une solution rapide, gratuite et sécurisée" name="submit" src="https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif" type="image" />
+                                        <img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
+                                    </form>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="container">
+                        <div class="event-content">
+                            <div class="title">
+                                <h3><a href="#">Abonnement semaine - 7€</a></h3>
+                                <div class="location">
+                                    <i></i>
+                                    <span>Abonnement de 7 jours</span>
+                                </div>
+                            </div>
+                            <div class="button">
+                                <a href="ServletUsers?action=abonnementSemaine" class="">
+                                    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                                        <input type='hidden' value="7" name="amount" />
+                                        <input name="currency_code" type="hidden" value="EUR" />
+                                        <input name="shipping" type="hidden" value="0.00" />
+                                        <input name="tax" type="hidden" value="0.00" />
+                                        <input name="return" type="hidden" value="http://localhost:8080/TP2_Web/success.jsp" />
+                                        <input name="cancel_return" type="hidden" value="http://localhost:8080/TP2_Web/cancelled.jsp" />
+                                        <input name="notify_url" type="hidden" value="" />
+                                        <input name="cmd" type="hidden" value="_xclick" />
+                                        <input name="business" type="hidden" value="grinny_vendeur@mmp.com" />
+                                        <input name="item_name" type="hidden" value="AbonnementSemaine" />
+                                        <input name="no_note" type="hidden" value="1" />
+                                        <input name="lc" type="hidden" value="FR" />
+                                        <input name="bn" type="hidden" value="PP-BuyNowBF" />
+                                        <input name="custom" type="hidden" value="grinny_acheteur@mmp.com" />
+                                        <input alt="Effectuez vos paiements via PayPal : une solution rapide, gratuite et sécurisée" name="submit" src="https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif" type="image" />
+                                        <img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
+                                    </form>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>MIAGE Music Project</title>
+                <div class="event">
+                    <div class="container">
+                        <div class="event-content">
+                            <div class="title">
+                                <h3><a href="#">Abonnement mois - 15€</a></h3>
+                                <div class="location">
+                                    <i></i>
+                                    <span>Abonnez-vous pendant 30 jours !</span>
+                                </div>
+                            </div>
+                            <div class="button">
+                               <a href="" class="">
+                                    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                                        <input type='hidden' value="15" name="amount" />
+                                        <input name="currency_code" type="hidden" value="EUR" />
+                                        <input name="shipping" type="hidden" value="0.00" />
+                                        <input name="tax" type="hidden" value="0.00" />
+                                        <input name="return" type="hidden" value="http://localhost:8080/TP2_Web/ServletUsers?action=abonnementMois" />
+                                        <input name="cancel_return" type="hidden" value="http://localhost:8080/TP2_Web/cancelled.jsp" />
+                                        <input name="notify_url" type="hidden" value="" />
+                                        <input name="cmd" type="hidden" value="_xclick" />
+                                        <input name="business" type="hidden" value="grinny_vendeur@mmp.com" />
+                                        <input name="item_name" type="hidden" value="AbonnementMois" />
+                                        <input name="no_note" type="hidden" value="1" />
+                                        <input name="lc" type="hidden" value="FR" />
+                                        <input name="bn" type="hidden" value="PP-BuyNowBF" />
+                                        <input name="custom" type="hidden" value="grinny_acheteur@mmp.com" />
+                                        <input alt="Effectuez vos paiements via PayPal : une solution rapide, gratuite et sécurisée" name="submit" src="https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif" type="image" />
+                                        <img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
+                                    </form>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <!-- Fonts -->
-        <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-        <link href="http://fonts.googleapis.com/css?family=Montserrat+Alternates:400,700" rel="stylesheet" type="text/css">
-        <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" rel="stylesheet" type="text/css">
+                <div class="event">
+                    <div class="container">
+                        <div class="event-content">
+                            <div class="title">
+                                <h3><a href="#">Abonnement 6 mois - 80€</a></h3>
+                                <div class="location">
+                                    <i></i>
+                                    <span>Abonnez-vous pendant 6 mois et profitez en illimité !</span>
+                                </div>
+                            </div>
+                            <div class="button">
+                                <a href="ServletUsers?action=abonnementSemestre" class="">
+                                    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                                        <input type='hidden' value="80" name="amount" />
+                                        <input name="currency_code" type="hidden" value="EUR" />
+                                        <input name="shipping" type="hidden" value="0.00" />
+                                        <input name="tax" type="hidden" value="0.00" />
+                                        <input name="return" type="hidden" value="http://localhost:8080/TP2_Web/success.jsp" />
+                                        <input name="cancel_return" type="hidden" value="http://localhost:8080/TP2_Web/cancelled.jsp" />
+                                        <input name="notify_url" type="hidden" value="" />
+                                        <input name="cmd" type="hidden" value="_xclick" />
+                                        <input name="business" type="hidden" value="grinny_vendeur@mmp.com" />
+                                        <input name="item_name" type="hidden" value="AbonnementSemestre" />
+                                        <input name="no_note" type="hidden" value="1" />
+                                        <input name="lc" type="hidden" value="FR" />
+                                        <input name="bn" type="hidden" value="PP-BuyNowBF" />
+                                        <input name="custom" type="hidden" value="grinny_acheteur@mmp.com" />
+                                        <input alt="Effectuez vos paiements via PayPal : une solution rapide, gratuite et sécurisée" name="submit" src="https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif" type="image" />
+                                        <img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
+                                    </form>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <link href="css/linecons.css" rel="stylesheet" type="text/css">
-        <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+                <div class="event">
+                    <div class="container">
+                        <div class="event-content">
+                            <div class="title">
+                                <h3><a href="#">Abonnement année - 150€</a></h3>
+                                <div class="location">
+                                    <i></i>
+                                    <span>Abonnez-vous à l'année pour plus de tranquillité !</span>
+                                </div>
+                            </div>
+                            <div class="button">
+                                <a href="ServletUsers?action=abonnementAnnee" class="">
+                                    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                                        <input type='hidden' value="150" name="amount" />
+                                        <input name="currency_code" type="hidden" value="EUR" />
+                                        <input name="shipping" type="hidden" value="0.00" />
+                                        <input name="tax" type="hidden" value="0.00" />
+                                        <input name="return" type="hidden" value="http://localhost:8080/TP2_Web/success.jsp" />
+                                        <input name="cancel_return" type="hidden" value="http://localhost:8080/TP2_Web/cancelled.jsp" />
+                                        <input name="notify_url" type="hidden" value="" />
+                                        <input name="cmd" type="hidden" value="_xclick" />
+                                        <input name="business" type="hidden" value="grinny_vendeur@mmp.com" />
+                                        <input name="item_name" type="hidden" value="AbonnementAnnee" />
+                                        <input name="no_note" type="hidden" value="1" />
+                                        <input name="lc" type="hidden" value="FR" />
+                                        <input name="bn" type="hidden" value="PP-BuyNowBF" />
+                                        <input name="custom" type="hidden" value="grinny_acheteur@mmp.com" />
+                                        <input alt="Effectuez vos paiements via PayPal : une solution rapide, gratuite et sécurisée" name="submit" src="https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif" type="image" />
+                                        <img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
+                                    </form>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/mediaelementplayer-theme.css">
-        <link rel="stylesheet" href="css/bxslider-theme.css">
-        <link rel="stylesheet" href="css/animate.css">
-        <link rel="stylesheet" href="css/main.css">
-
-        <script src="js/core/modernizr.js"></script>
-    </head>
-    <body>
-
-        <c:import url="header.jsp"/>
-
-        <c:if test="${!empty sessionScope.connecte}">
-            <div>
-                <c:import url="content_abonnement.jsp"/>
             </div>
-        </c:if>
+        </div>
+    </div>
+</div>
 
-        <c:import url="footer.jsp"/>
+--%>
 
-        <!-- Scripts -->
-        <script src="js/core/jquery-1.11.0.min.js"></script>
-        <script src="js/core/bootstrap.min.js"></script>
-
-        <script src="js/plugins/html5slider.js"></script>
-        <script src="js/plugins/mediaelement-and-player.min.js"></script>
-        <script src="js/plugins/jquery.bxslider.min.js"></script>
-        <script src="js/plugins/jquery.removeWhitespace.min.js"></script>
-        <script src="js/plugins/jquery.collagePlus.min.js"></script>
-
-        <script src="js/scripts/audio.js"></script>
-        <script src="js/scripts/init.js"></script>
-        <script src="js/scripts/main.js"></script>
-
-    </body>
-</html>
+    </div>
+</div>

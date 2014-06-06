@@ -37,6 +37,11 @@ public class GestionnaireArtistes {
 
         return q.getResultList();
     }
+    
+    public Collection<Artiste> getAllArtistes() {
+        Query q = em.createQuery("select a from Artiste a Order by a.nom");
+        return q.getResultList();
+    }
 
     public Collection<Artiste> getArtisteParNom(String nom) {
         Query q = em.createQuery("select a from Artiste a where a.nom=:nom");

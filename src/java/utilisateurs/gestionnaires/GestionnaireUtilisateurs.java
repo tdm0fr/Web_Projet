@@ -86,11 +86,11 @@ public class GestionnaireUtilisateurs {
         q.executeUpdate();
     }
     
-    public Collection<Utilisateur> getUserByLogin(String login) {
+    public Utilisateur getUserByLogin(String login) {
         // Exécution d'une requête équivalente à un select *
         Query q = em.createQuery("select u from Utilisateur u where u.login=:login");
         q.setParameter("login", login);
-        return q.getResultList();
+        return (Utilisateur)q.getResultList();
     }
 
     public void updateUser(int ID, String prenom, String nom, String login, String password) {

@@ -59,10 +59,10 @@ public class GestionnaireMusiques {
         return q.getResultList();
     }
     
-//    public void addMusique(String titre, int nbPistes, String genre, int annee, String wikiLink) {
-//        Musique m = new Musique(titre, nbPistes, genre, annee, wikiLink);
-//        em.persist(m);
-//    }
+    public void addMusique(String titre, int nbPistes, String genre, int annee, String wikiLink) {
+        Musique m = new Musique(titre, nbPistes, genre, annee, wikiLink);
+        em.persist(m);
+    }
     
     public Collection<Musique> getMusiqueParID(int id){
         Query q = em.createQuery("select m from Musique m where m.id=:id");

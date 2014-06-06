@@ -1,7 +1,9 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,9 +25,8 @@ public class ServletUsers extends HttpServlet {
 
     public void init() {
         System.out.println("Ajout du premier utilisateur");
-        Adresse biot = new Adresse("Biot", "06410");
-        gestionnaireUtilisateurs.inscription("grinny", "hermant", "grinny", "password", biot);
-        
+        //Adresse biot = new Adresse("Biot", "06410");
+        gestionnaireUtilisateurs.createUser("miage", "unice", "admin", "admin");
     }
 
     /**
@@ -78,37 +79,37 @@ public class ServletUsers extends HttpServlet {
             } else if (action.equals("listerLesUtilisateurs")) {
                 
                 if (page != null) {
-                    Collection<Utilisateur> liste = gestionnaireUtilisateurs.getUsersbyPage(Integer.parseInt(page));
+                    Collection<Utilisateur> liste = gestionnaireUtilisateurs.getUsersByPage(Integer.parseInt(page));
                     request.setAttribute("listeDesUsers", liste);
-                    request.setAttribute("totalPages", gestionnaireUtilisateurs.getTotalPages());
+                    request.setAttribute("totalPages", gestionnaireUtilisateurs.getNbPages());
                     forwardTo = "index.jsp?action=listerLesUtilisateurs&p=" + page;
                     message = "Liste des utilisateurs";
                     
-                } else if (action.equals("listerUtilisateursParVille")) {
-                    // on récupère le paramètre idVille  
-                    int idVille = Integer.parseInt(request.getParameter("idVille"));
-
-                    // On récupère la liste des utilisateurs pour la ville  
-                    Collection<Utilisateur> liste = gestionnaireUtilisateurs.getUsersParVille(idVille);
-
-                    // et on passe le résultat à la JSP pour affichage...  
-                    request.setAttribute("listeDesUsers", liste);
-                    forwardTo = "index.jsp?action=listerLesUtilisateurs";
-                    message = "Liste des utilisateurs pour la ville No : " + idVille;
+//              } else if (action.equals("listerUtilisateursParVille")) {
+//                    // on récupère le paramètre idVille  
+//                    int idVille = Integer.parseInt(request.getParameter("idVille"));
+//
+//                    // On récupère la liste des utilisateurs pour la ville  
+//                    Collection<Utilisateur> liste = gestionnaireUtilisateurs.getUsersParVille(idVille);
+//
+//                    // et on passe le résultat à la JSP pour affichage...  
+//                    request.setAttribute("listeDesUsers", liste);
+//                    forwardTo = "index.jsp?action=listerLesUtilisateurs";
+//                    message = "Liste des utilisateurs pour la ville No : " + idVille;
                     
                 } else {
-                    Collection<Utilisateur> liste = gestionnaireUtilisateurs.getUsersbyPage(1);
+                    Collection<Utilisateur> liste = gestionnaireUtilisateurs.getUsersByPage(1);
                     request.setAttribute("listeDesUsers", liste);
-                    request.setAttribute("totalPages", gestionnaireUtilisateurs.getTotalPages());
+                    request.setAttribute("totalPages", gestionnaireUtilisateurs.getNbPages());
                     forwardTo = "index.jsp?action=listerLesUtilisateurs&p=1";
                     message = "Liste des utilisateurs";
                 }
                 
             } else if (action.equals("creerUtilisateursDeTest")) {
                 gestionnaireUtilisateurs.creerUtilisateursDeTest();
-                Collection<Utilisateur> liste = gestionnaireUtilisateurs.getUsersbyPage(1);
+                Collection<Utilisateur> liste = gestionnaireUtilisateurs.getUsersByPage(1);
                 request.setAttribute("listeDesUsers", liste);
-                request.setAttribute("totalPages", gestionnaireUtilisateurs.getTotalPages());
+                request.setAttribute("totalPages", gestionnaireUtilisateurs.getNbPages());
                 forwardTo = "index.jsp?action=listerLesUtilisateurs";
                 message = "Utilisateurs de test créés";
                 
@@ -118,18 +119,19 @@ public class ServletUsers extends HttpServlet {
                 String login = request.getParameter("login");
                 String password = request.getParameter("password");
                 Adresse adress = new Adresse(request.getParameter("ville"), request.getParameter("postal"));
-                gestionnaireUtilisateurs.inscription(nom, prenom, login, password, adress);
+                gestionnaireUtilisateurs.createUser(nom, prenom, login, password);
                 forwardTo = "index.jsp?action=listerLesUtilisateurs&p=" + request.getParameter("page");
                 message = "L'utilisateur de login " + login + " a été créé";
                 
             } else if (action.equals("supprimer")) {
-                gestionnaireUtilisateurs.deleteUtilisateur(request.getParameter("login"));
+                gestionnaireUtilisateurs.deleteUser(request.getParameter("login"));
                 forwardTo = "index.jsp?action=listerLesUtilisateurs&p=" + request.getParameter("page");
                 message = "L'utilisateur de login " + request.getParameter("login") + " a été supprimé";
                 
             } else if (action.equals("chercherParLogin")) {
                 System.out.println("lol");
-                Collection<Utilisateur> liste = gestionnaireUtilisateurs.showUsersByLogin(request.getParameter("login"));
+                Collection<Utilisateur> liste = new ArrayList();
+                liste.add(gestionnaireUtilisateurs.getUserByLogin(request.getParameter("login")));
                 request.setAttribute("listeDesUsers", liste);
                 forwardTo = "index.jsp?action=chercherParLogin";
                 message = "";

@@ -20,17 +20,19 @@
                 <div class="contact-form">
                     
                     <c:if test="${sessionScope.connecte}">
-                        <section class="content-header"><h1>Menu de gestion des utilisateurs</h1></section>
+                        <h2 class="heading">Gestion des utilisateurs</h2>
 
-                        Liste des fonctionnalités à implémenter dans la Servlet (note : après chaque action cette page sera rappelée par la servlet avec la liste des utilisateurs raffraichie et un message de confirmation  
+                            <li><a href="index.jsp?page=utilisateurs&action=detailUtilisateurs">Afficher les détails d'un utilisateur</a></li>
+
+                            <li><a href="index.jsp?page=utilisateurs&action=modifierUtilisateurs">Modifier un utilisateur</a></li>
+
+                            <li><a href="index.jsp?page=utilisateurs&action=detailUtilisateurs">Supprimer un utilisateur</a></li>
+
+                            <li><a href="index.jsp?page=utilisateurs&action=detailUtilisateurs">Supprimer tous les utilisateurs</a></li>
+
+                            <li><a href="index.jsp?page=utilisateurs&action=detailUtilisateurs">Lister tous les utilisateurs</a></li>
+                        
                         <ol>  
-                            <c:if test="${param['action'] == 'creerUtilisateursDeTest'}" >
-                                <li>
-                                    <a href="ServletUsers?action=creerUtilisateursDeTest">
-                                        Créer 4 utilisateurs de test
-                                    </a>
-                                </li>
-                            </c:if>
 
                             <c:if test="${param['action'] == 'detailUtilisateurs'}" >
                                 <li>Afficher les détails d'un utilisateur</li>  

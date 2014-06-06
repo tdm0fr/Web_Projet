@@ -33,8 +33,10 @@ public class GestionnaireUtilisateurs {
     public Collection<Utilisateur> getUsersByPage(int pageID) {
 
         Query q = em.createQuery("select u from Utilisateur u Order by u.login");
-
-        this.setNbRows(q.getResultList().size());
+           
+        int nb = q.getResultList().size();
+        if (nb == 0) this.setNbRows(0);
+        else this.setNbRows(nb);
         this.applyRowsPagesUpdates();
 
         q.setFirstResult((pageID - 1) * this.nbRowsByPage);

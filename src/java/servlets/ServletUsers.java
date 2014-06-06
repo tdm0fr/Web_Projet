@@ -134,13 +134,22 @@ public class ServletUsers extends HttpServlet {
                 message = "L'utilisateur de login " + request.getParameter("login") + " a été supprimé";
                 
             } else if (action.equals("chercherParLogin")) {
-                System.out.println("lol");
                 Collection<Utilisateur> liste = new ArrayList();
                 liste = gestionnaireUtilisateurs.getUserByLogin(request.getParameter("login"));
                 request.setAttribute("listeDesUsers", liste);
                 forwardTo = "index.jsp?page=utilisateurs&action=chercherParLogin";
-                message = "";
-            } 
+                
+            } else if (action.equals("modifierUtilisateurs")) {
+                String login = request.getParameter("login");
+                String nom = request.getParameter("nom");
+                String prenom = request.getParameter("prenom");
+                gestionnaireUtilisateurs.updateUser(prenom, nom, login);
+                Collection<Utilisateur> liste = gestionnaireUtilisateurs.getAllUsers();
+                request.setAttribute("listeDesUsers", liste);
+                forwardTo = "web-list.jsp?action=listerLesUtilisateurs&page=1";
+                message = "Modifier les détails d'un utilisateurs";
+
+            }
             else {
                 forwardTo = "index.jsp?action=todo";
                 message = "La fonctionnalité pour le paramètre " + action + " est à  implémenter !";

@@ -9,10 +9,9 @@
                 <h1>Soyez la musique !</h1>
                 <p>The Sound est le site de musique qu'il vous faut</p>
 
-                <p>A vous de jouer !
-                    <a class="animated fadeInRight" href="index.jsp?action=inscription">Inscription</a>
-                    <a class="animated fadeInRight" href="index.jsp?action=connexion">Connexion</a>
-                </p>
+                <p>A vous de jouer !</p>
+                <p><a class="animated fadeInRight" href="index.jsp?action=inscription">Inscription -</a>
+                    <a class="animated fadeInRight" href="index.jsp?action=connexion"> Connexion</a></p>
 
             </div>
         </div>

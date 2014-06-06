@@ -10,7 +10,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.util.Collection;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -19,16 +18,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import utilisateurs.gestionnaires.GestionnaireArtiste;
-import utilisateurs.gestionnaires.GestionnaireInstrument;
+import utilisateurs.gestionnaires.GestionnaireArtistes;
+import utilisateurs.gestionnaires.GestionnaireInstruments;
 import utilisateurs.gestionnaires.GestionnaireMusiques;
-import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
-import utilisateurs.modeles.Adresse;
 import utilisateurs.modeles.Artiste;
 import utilisateurs.modeles.Instrument;
 import utilisateurs.modeles.Musique;
-import utilisateurs.modeles.Utilisateur;
 
 /**
  *
@@ -39,9 +34,9 @@ public class ServletArtists extends HttpServlet {
     @EJB
     private GestionnaireMusiques gestionnaireMusiques;
     @EJB
-    private GestionnaireInstrument gestionnaireInstrument;
+    private GestionnaireInstruments gestionnaireInstrument;
     @EJB
-    private GestionnaireArtiste gestionnaireArtiste;
+    private GestionnaireArtistes gestionnaireArtiste;
 
     
 
@@ -68,7 +63,7 @@ public class ServletArtists extends HttpServlet {
 
         if (action != null) {
             if (action.equals("listeMusiques")) {
-                Collection<Musique> liste = gestionnaireMusiques.getAllMusics();
+                Collection<Musique> liste = gestionnaireMusiques.getAllMusiques();
                 request.setAttribute("listeMusiques", liste);
                 forwardTo = "musiques.jsp?action=listeMusiques";
             } else if (action.equals("listeArtistes")) {
@@ -86,14 +81,14 @@ public class ServletArtists extends HttpServlet {
             } 
 
         }
-        request.setAttribute("length", gestionnaireMusiques.getAllMusics().size());
+        request.setAttribute("length", gestionnaireMusiques.getAllMusiques().size());
         RequestDispatcher dp = request.getRequestDispatcher(forwardTo);
         dp.forward(request, response);
     }
 
     public void parser() {
         try {
-            InputStream ips = new FileInputStream("/Users/naana_on/Documents/M1/Web/TP2_Web/src/java/servlets/liste.txt");
+            InputStream ips = new FileInputStream("C:\\Users\\BRAINLAGARRRRR\\Documents\\NetBeansProjects\\Web_Projet\\src\\java\\servlets\\liste.txt");
             InputStreamReader ipsr = new InputStreamReader(ips);
             BufferedReader br = new BufferedReader(ipsr);
             String ligne;

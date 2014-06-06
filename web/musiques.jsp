@@ -1,37 +1,38 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>  
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 
-<div id="contact-page" class="container">
-    <div class="bg">
-        <div class="row">    		
-            <div class="col-sm-12">
-                <h3>Musiques</h3>
+<!--Recherche : <input id="filter" type="text" value="" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"/> -->
 
-                <!--Recherche : <input id="filter" type="text" value="" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"/> -->
-
-                <c:if test="${param['action'] == 'listeMusiques'}" >
-                    <h2 class="heading"></h2>
-                    
-                    <div class="row">
-                        
-                    <c:forEach var="m" items="${requestScope['listeMusiques']}">
-                        
-                        <div class="col-sm-4">
-                            <div class="single-album"
-                                 <img alt="" src="images/album/album1.jpg"></img>
+<c:if test="${param['action'] == 'listeMusiques'}" >
+    <div id="album">
+        <div class="container">
+            <div class="album-inner">               
+                <div class="row">                    
+                    <div class="col-sm-12 col-md-8">
+                        <div class="bg">
+                            <h2 class="heading">Musiques</h2>
+                            <div class="row">
+                                <c:forEach var="m" items="${requestScope['listeMusiques']}">
+                                    <div class="col-sm-4">
+                                        <div class="single-album">
+                                            <img src="images/album/album1.jpg" alt="">
+                                            <div class="album-heading">
+                                               <h3><a href="#">${m.titre}</a></h3>
+                                                <p><span>${m.artiste.nomArtiste}</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
                             </div>
-                            
-                            <div class="album-heading">
-                                <h3>
-                                    <a href="#">${m.titre}</a>
-                                </h3>
-                                <p>
-                                    <span>${m.artiste.nomArtiste}</span>
-                                </p>
-                            </div>
-
                         </div>
+                    </div>                          
+                </div>
+            </div>
+        </div>
+    </div>
+</c:if>
 
+<%--
                         <div class="button">
                             <a>
                                 <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
@@ -61,7 +62,7 @@
         </div>
     </div>
 </div>
-
+--%>
                 <c:if test="${param['action'] == 'listeArtistes'}" >
                     <div class="content">
                         <div class="container-fluid no-horizontal-padding">

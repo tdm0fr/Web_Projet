@@ -48,8 +48,11 @@ public class ServletUsers extends HttpServlet {
         
         if (action != null) {
             if (action.equals("authentifier")) {
-                System.out.println("**************************************************");
-                Utilisateur u = gestionnaireUtilisateurs.getUserByLogin(request.getParameter("login"));
+                Collection<Utilisateur> users;
+                Utilisateur u = new Utilisateur();
+                users = gestionnaireUtilisateurs.getUserByLogin(request.getParameter("login"));
+                for (Utilisateur user : users)
+                    u = user;
                 System.out.println(u.toString());
                 if (u != null) {
                     if (u.getPassword().equals(request.getParameter("password"))) {
@@ -133,7 +136,7 @@ public class ServletUsers extends HttpServlet {
             } else if (action.equals("chercherParLogin")) {
                 System.out.println("lol");
                 Collection<Utilisateur> liste = new ArrayList();
-                liste.add(gestionnaireUtilisateurs.getUserByLogin(request.getParameter("login")));
+                liste = gestionnaireUtilisateurs.getUserByLogin(request.getParameter("login"));
                 request.setAttribute("listeDesUsers", liste);
                 forwardTo = "index.jsp?action=chercherParLogin";
                 message = "";

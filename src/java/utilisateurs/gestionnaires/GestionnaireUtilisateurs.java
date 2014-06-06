@@ -14,7 +14,7 @@ import utilisateurs.modeles.Utilisateur;
 
 /**
  *
- * @author Franck Munier
+ * @author Franck Munier & Medhy Salim
  */
 
 @Stateless

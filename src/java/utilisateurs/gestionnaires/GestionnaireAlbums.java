@@ -14,7 +14,7 @@ import utilisateurs.modeles.Album;
 
 /**
  *
- * @author Medhy Salim
+ * @author Franck Munier & Medhy Salim
  */
 @Stateless
 public class GestionnaireAlbums {

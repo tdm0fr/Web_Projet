@@ -9,7 +9,7 @@ import utilisateurs.modeles.Musique;
 
 /**
  *
- * @author Medhy Salim
+ * @author Franck Munier & Medhy Salim
  */
 @Stateless
 public class GestionnaireMusiques {

@@ -14,12 +14,7 @@
 
                             <li><a href="index.jsp?page=utilisateurs&action=modifierUtilisateurs">Modifier un utilisateur</a></li>
 
-                            <li><a href="index.jsp?page=utilisateurs&action=supprimerUtilisateurs">Supprimer un utilisateur</a></li>
-
-                            <%-- <li><a href="index.jsp?page=utilisateurs&action=detailUtilisateurs">Supprimer tous les utilisateurs</a></li> --%>
-
-                            <%-- <li><a href="index.jsp?page=utilisateurs&action=listerLesUtilisateurs">Lister tous les utilisateurs</a></li> --%>
-                        
+                            <li><a href="index.jsp?page=utilisateurs&action=supprimer">Supprimer un utilisateur</a></li>
                         <ol>  
 
                             <c:if test="${param['action'] == 'detailUtilisateurs'}" >
@@ -42,17 +37,14 @@
                                     <input type="submit" value="Mettre à jour" name="submit"/>  
                                 </form>  
                             </c:if>
-                        <%--                
-                            <c:if test="${param['action'] == 'supprimerUtilisateurs'}" >
-                                <li>Supprimer un utilisateur</li>  
-                                <form action="ServletUsers" method="get">  
-                                    login : <input type="text" name="login"/><br>  
-                                    <input type="hidden" name="action" value="supprimer"/>  
-                                    <input type="submit" value="Supprimer" name="submit"/>  
-                                </form>  
-                            </ol>  
-                        </c:if>
-                        --%>
+                            
+                           <c:if test="${param['action'] == 'supprimer'}" >     
+                           <form action="ServletUsers" method="get">
+                                Login : <input type="text" name="login"/><br>
+                                <input type="hidden" name="action" value="deleteUser"/>
+                                <input type="submit" value="Supprimer" name="submit"/>
+                            </form> 
+                           </c:if>
                         <!-- Fin du menu -->  
 
                         <!-- Zone qui affiche les utilisateurs si le paramètre action vaut listerComptes -->  

@@ -29,10 +29,10 @@ public class Artiste implements Serializable {
     private String nom;
     private String resume;
     private String photoURL;
-    @ManyToMany(mappedBy = "listeArtistes")
-    private Collection<Musique> listeMusiques;
-    @ManyToMany(mappedBy = "listeArtistes")
-    private Collection<Album> listeAlbums;
+//    @ManyToMany(mappedBy = "listeArtistes")
+//    private Collection<Musique> listeMusiques;
+//    @ManyToMany(mappedBy = "listeArtistes")
+//    private Collection<Album> listeAlbums;
 
     public Artiste() {
     }
@@ -75,29 +75,29 @@ public class Artiste implements Serializable {
         this.photoURL = photoURL;
     }
 
-    public Collection<Musique> getListeMusiques() {
-        return listeMusiques;
-    }
-    
-    public void addMusique(Musique m) {  
-        listeMusiques.add(m);  
-    }
-        
-    public void removeMusique(Musique m) {  
-        listeMusiques.remove(m);  
-    }
-
-    public Collection<Album> getListeAlbums() {
-        return listeAlbums;
-    }
-    
-    public void addAlbum(Album a) {  
-        listeAlbums.add(a);  
-    }
-        
-    public void removeAlbum(Album a) {  
-        listeAlbums.remove(a);  
-    }
+//    public Collection<Musique> getListeMusiques() {
+//        return listeMusiques;
+//    }
+//    
+//    public void addMusique(Musique m) {  
+//        listeMusiques.add(m);  
+//    }
+//        
+//    public void removeMusique(Musique m) {  
+//        listeMusiques.remove(m);  
+//    }
+//
+//    public Collection<Album> getListeAlbums() {
+//        return listeAlbums;
+//    }
+//    
+//    public void addAlbum(Album a) {  
+//        listeAlbums.add(a);  
+//    }
+//        
+//    public void removeAlbum(Album a) {  
+//        listeAlbums.remove(a);  
+//    }
 
     @Override
     public int hashCode() {

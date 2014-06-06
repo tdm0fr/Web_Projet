@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 /**
@@ -24,16 +25,20 @@ public class Album implements Serializable {
     @Id  
     @GeneratedValue(strategy = GenerationType.AUTO)  
     private int id;
+    private String nom;
     private String photoURL;
     private String resume;
     private String wikipediaURL;
     @OneToMany(mappedBy = "album")
     private Collection<Musique> listeMusiques;
+    @ManyToMany
+    private Collection<Artiste> listeArtistes;
 
     public Album() {
     }
 
-    public Album(String photoURL, String resume, String wikipediaURL) {
+    public Album(String nom, String photoURL, String resume, String wikipediaURL) {
+        this.nom = nom;
         this.photoURL = photoURL;
         this.resume = resume;
         this.wikipediaURL = wikipediaURL;
@@ -45,6 +50,14 @@ public class Album implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+    
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     public String getPhotoURL() {
@@ -83,6 +96,18 @@ public class Album implements Serializable {
         listeMusiques.remove(m);  
     }
 
+    public Collection<Artiste> getListeArtistes() {
+        return listeArtistes;
+    }
+    
+    public void addArtiste(Artiste a) {  
+        listeArtistes.add(a);  
+    }
+        
+    public void removeArtiste(Artiste a) {  
+        listeArtistes.remove(a);  
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -107,6 +132,6 @@ public class Album implements Serializable {
 
     @Override
     public String toString() {
-        return "Album{" + "id=" + id + ", photoURL=" + photoURL + ", resume=" + resume + ", wikipediaURL=" + wikipediaURL + ", listeMusiques=" + listeMusiques + '}';
+        return "Album{" + "id=" + id + ", nom=" + nom + ", photoURL=" + photoURL + ", resume=" + resume + ", wikipediaURL=" + wikipediaURL + ", listeMusiques=" + listeMusiques + '}';
     }
 }

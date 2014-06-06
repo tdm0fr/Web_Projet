@@ -13,7 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -29,8 +29,10 @@ public class Artiste implements Serializable {
     private String nom;
     private String resume;
     private String photoURL;
-    @OneToMany(mappedBy = "artiste")
+    @ManyToMany(mappedBy = "artiste")
     private Collection<Musique> listeMusiques;
+    @ManyToMany(mappedBy = "albums")
+    private Collection<Album> listeAlbums;
 
     public Artiste() {
     }
@@ -83,6 +85,18 @@ public class Artiste implements Serializable {
         
     public void removeMusique(Musique m) {  
         listeMusiques.remove(m);  
+    }
+
+    public Collection<Album> getListeAlbums() {
+        return listeAlbums;
+    }
+    
+    public void addAlbum(Album a) {  
+        listeAlbums.add(a);  
+    }
+        
+    public void removeAlbum(Album a) {  
+        listeAlbums.remove(a);  
     }
 
     @Override

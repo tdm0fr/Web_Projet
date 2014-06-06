@@ -7,6 +7,7 @@
 package utilisateurs.modeles;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ public class Utilisateur implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String firstname;  
     private String lastname;  
     private String login;
@@ -44,11 +45,11 @@ public class Utilisateur implements Serializable {
 		this.password = password;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -102,19 +103,21 @@ public class Utilisateur implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (int) id;
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Utilisateur)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        Utilisateur other = (Utilisateur) object;
-        if (this.id != other.id) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Utilisateur other = (Utilisateur) obj;
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;

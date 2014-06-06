@@ -32,7 +32,7 @@ public class GestionnaireUtilisateurs {
 
     public Collection<Utilisateur> getUsersByPage(int pageID) {
 
-        Query q = em.createQuery("select u from Utilisateur u");
+        Query q = em.createQuery("select u from Utilisateur u Order by u.login");
 
         this.setNbRows(q.getResultList().size());
         this.applyRowsPagesUpdates();
@@ -50,8 +50,6 @@ public class GestionnaireUtilisateurs {
      */
     public Collection<Utilisateur> getAllUsers() {
         Query q = em.createQuery("select u from Utilisateur u Order by u.login");
-        this.setNbRows(q.getResultList().size());
-        this.applyRowsPagesUpdates();
         return q.getResultList();
     }
 
@@ -80,6 +78,13 @@ public class GestionnaireUtilisateurs {
         return u;
     }
 
+    public void addAbonnementToUser(int userID, int abonnementID) {
+        Utilisateur u = em.find(Utilisateur.class, userID);
+        Query q = em.createQuery("update Utilisateur u set u.abonnement=:abonnementID where u.id=:userID");
+        q.setParameter("abonnementID", abonnementID);
+        q.setParameter("userID", userID);
+        q.executeUpdate();
+    }
     
     public Collection<Utilisateur> getUserByLogin(String login) {
         // Exécution d'une requête équivalente à un select *
@@ -88,12 +93,13 @@ public class GestionnaireUtilisateurs {
         return q.getResultList();
     }
 
-    public void updateUser(String prenom, String nom, String login, String password) {
-        Query q = em.createQuery("update Utilisateur u set u.firstname=:nom, u.lastname=:prenom, u.password=:password u.login=:login");
+    public void updateUser(int ID, String prenom, String nom, String login, String password) {
+        Query q = em.createQuery("update Utilisateur u set u.firstname=:nom, u.lastname=:prenom, u.password=:password, u.login=:login where u.id=:ID");
         q.setParameter("login", login);
         q.setParameter("nom", nom);
         q.setParameter("prenom", prenom);
         q.setParameter("password",password);
+        q.setParameter("ID", ID);
         q.executeUpdate();
     }
     

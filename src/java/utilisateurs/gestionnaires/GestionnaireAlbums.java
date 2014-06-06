@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package utilisateurs.gestionnaires;
 
 import java.util.Collection;
@@ -5,17 +10,15 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import utilisateurs.modeles.Musique;
+import utilisateurs.modeles.Album;
 
 /**
  *
  * @author Medhy Salim
  */
 @Stateless
-public class GestionnaireMusiques {
+public class GestionnaireAlbums {
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
     @PersistenceContext
     private EntityManager em;
     private int LigneUne = 0;
@@ -24,10 +27,8 @@ public class GestionnaireMusiques {
     private int nbPages;
     private int pageCourante = 1;
 
-    public Collection<Musique> getMusiquesParPage(int pageID) {
-        
-        Query q = em.createQuery("select m from Musique m Order by m.titre");
-        
+    public Collection<Album> getAllAlbumsParPage(int pageID) {
+        Query q = em.createQuery("select a from Album a Order by a.nom");
         this.setNbLignes(q.getResultList().size());
         this.appliquerPagination();
 
@@ -36,10 +37,25 @@ public class GestionnaireMusiques {
 
         return q.getResultList();
     }
+
+    public Collection<Album> getAlbumsParNom(String nom) {
+        Query q = em.createQuery("select a from Album a where a.nom=:nom");
+        q.setParameter("nom", nom);
+        return q.getResultList();
+    }
     
+    public Collection<Album> getAlbumsParArtiste(String nom) {
+        Query q = em.createQuery("select a.id from Artiste a where a.nom=:nom");
+        q.setParameter("nom", nom);
+        Object idArtiste = q.getSingleResult();
+        q = em.createQuery("select a from Album a, Artiste ar where ar.id=:idArtiste");
+        q.setParameter("idArtiste", idArtiste);
+        return q.getResultList();
+    }
+
     /**
-     * appliquerPagination : modifie les attributs en fonction du nombre
- de musiques
+     * applyRowsPagesUpdates : modifie les attributs en fonction du nombre
+     * d'utilisateurs
      */
     public void appliquerPagination() {
         if (this.nbLignes % nbLignesParPage == 0) {
@@ -48,42 +64,7 @@ public class GestionnaireMusiques {
             this.nbPages = this.nbLignes / this.nbLignesParPage + 1;
         }
     }
-
-    /**
-     * Méthode getAllMusiques : Permet de lister les musiques
-     *
-     * @return
-     */
-    public Collection<Musique> getAllMusiques() {
-        Query q = em.createQuery("select m from Musique m Order by m.titre");
-        return q.getResultList();
-    }
     
-//    public void addMusique(String titre, int nbPistes, String genre, int annee, String wikiLink) {
-//        Musique m = new Musique(titre, nbPistes, genre, annee, wikiLink);
-//        em.persist(m);
-//    }
-    
-    public Collection<Musique> getMusiqueParID(int id){
-        Query q = em.createQuery("select m from Musique m where m.id=:id");
-        q.setParameter("id", id);
-        return q.getResultList();
-    }
-    
-    public Collection<Musique> getMusiqueParTitre(String titre) {
-        Query q = em.createQuery("select m from Musique m where m.titre=:titre");
-        return q.getResultList();
-    }
-    
-    public Collection<Musique> getMusiqueParArtiste(String nom) {
-        Query q = em.createQuery("select a.id from Artiste a where a.nom=:nom");
-        q.setParameter("nom", nom);
-        Object idArtiste = q.getSingleResult();
-        q = em.createQuery("select m from Musique m where m.artiste.id =:idArtiste");
-        q.setParameter("idArtiste", idArtiste);
-        return q.getResultList();
-    }
-
     // --- Getters
     //
     public int getLigneUne() {

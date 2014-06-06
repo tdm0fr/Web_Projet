@@ -62,7 +62,6 @@ public class ServletArtists extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        String page = request.getParameter("page");
         String forwardTo = "";
         String message = "";
 
@@ -70,7 +69,7 @@ public class ServletArtists extends HttpServlet {
             if (action.equals("listeMusiques")) {
                 Collection<Musique> liste = gestionnaireMusiques.getAllMusics();
                 request.setAttribute("listeMusiques", liste);
-                forwardTo = "musiques.jsp?action=listeMusiques";
+                forwardTo = "index.jsp?page=musiques&action=listeMusiques";
             } else if (action.equals("listeArtistes")) {
                 Collection<Artiste> liste = gestionnaireArtiste.getAllArtists();
                 request.setAttribute("listeArtistes", liste);
@@ -82,7 +81,7 @@ public class ServletArtists extends HttpServlet {
                 System.out.println(idmusique);
                 Collection<Instrument> liste = gestionnaireInstrument.getInstrumentParMusique(idmusique);
 //                   System.out.println(liste);
-//               request.setAttribute("detailsMusique", liste);
+                     request.setAttribute("detailsMusique", liste);
             } 
 
         }
@@ -93,7 +92,7 @@ public class ServletArtists extends HttpServlet {
 
     public void parser() {
         try {
-            InputStream ips = new FileInputStream("/Users/naana_on/Documents/M1/Web/TP2_Web/src/java/servlets/liste.txt");
+            InputStream ips = new FileInputStream("C:\\Users\\Franck\\Documents\\NetBeansProjects\\Web_Projet\\src\\java\\servlets\\liste.txt");
             InputStreamReader ipsr = new InputStreamReader(ips);
             BufferedReader br = new BufferedReader(ipsr);
             String ligne;

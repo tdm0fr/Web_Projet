@@ -25,12 +25,6 @@
                                     <label for="password">Mot de passe</label>
                                     <input type="password" name="password"/><br>
 
-                                    <label for="ville">Adresse</label>
-                                    <input type="text" name="ville"/><br> 
-
-                                    <label for="postal">Code postal</label>
-                                    <input type="text" name="postal"/><br>
-
                                     <input type="hidden" name="action" value="creerUnUtilisateur"/>  
                                     <button type="submit" value="Valider l'inscription" name="submit">Valider l'inscription</button>
                                 </div>

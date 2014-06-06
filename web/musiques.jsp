@@ -18,7 +18,7 @@
                                             <img src="images/album/album1.jpg" alt="">
                                             <div class="album-heading">
                                                <h3><a href="#">${m.titre}</a></h3>
-                                                <p><span>${m.artiste.nomArtiste}</span></p>
+                                                
                                             </div>
                                         </div>
                                     </div>

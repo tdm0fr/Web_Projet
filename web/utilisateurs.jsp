@@ -45,6 +45,7 @@
                                 <input type="submit" value="Supprimer" name="submit"/>
                             </form> 
                            </c:if>
+
                         <!-- Fin du menu -->  
 
                         <!-- Zone qui affiche les utilisateurs si le paramètre action vaut listerComptes -->  

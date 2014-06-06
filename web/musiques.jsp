@@ -46,7 +46,9 @@
                                         <div class="single-album">
                                             <img src="images/album/album1.jpg" alt="">
                                             <div class="album-heading">
+
                                                <h3 class="title"><a href="">${a.nom}</a></h3>                                     
+
                                             </div>
                                         </div>
                                     </div>
@@ -59,3 +61,5 @@
         </div>
     </div>
 </c:if>
+=======
+

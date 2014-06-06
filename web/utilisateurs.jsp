@@ -1,17 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>  
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
-    <%--
-<div class="wrapper">
-
-    <div class="page-header page-header-home clearfix">
-        <div class="col-md-4 col-sm-6">
-            <div class="search">
-                <form action="#">
-                    <input type="text" x-webkit-speech>
-                </form>
-            </div>
-        </div>
-    --%>
 
 <div id="contact-page" class="container">
     <div class="bg">
@@ -26,11 +14,11 @@
 
                             <li><a href="index.jsp?page=utilisateurs&action=modifierUtilisateurs">Modifier un utilisateur</a></li>
 
-                            <li><a href="index.jsp?page=utilisateurs&action=detailUtilisateurs">Supprimer un utilisateur</a></li>
+                            <li><a href="index.jsp?page=utilisateurs&action=supprimerUtilisateurs">Supprimer un utilisateur</a></li>
 
-                            <li><a href="index.jsp?page=utilisateurs&action=detailUtilisateurs">Supprimer tous les utilisateurs</a></li>
+                            <%-- <li><a href="index.jsp?page=utilisateurs&action=detailUtilisateurs">Supprimer tous les utilisateurs</a></li> --%>
 
-                            <li><a href="index.jsp?page=utilisateurs&action=detailUtilisateurs">Lister tous les utilisateurs</a></li>
+                            <%-- <li><a href="index.jsp?page=utilisateurs&action=listerLesUtilisateurs">Lister tous les utilisateurs</a></li> --%>
                         
                         <ol>  
 
@@ -49,11 +37,12 @@
                                     Login : <input type="text" name="login"/><br>  
                                     Nom : <input type="text" name="nom"/><br>  
                                     Prénom : <input type="text" name="prenom"/><br>  
+                                    Password : <input type="text" name="password"/><br>
                                     <input type="hidden" name="action" value="updateUtilisateur"/>  
                                     <input type="submit" value="Mettre à jour" name="submit"/>  
                                 </form>  
                             </c:if>
-
+                        <%--                
                             <c:if test="${param['action'] == 'supprimerUtilisateurs'}" >
                                 <li>Supprimer un utilisateur</li>  
                                 <form action="ServletUsers" method="get">  
@@ -63,6 +52,7 @@
                                 </form>  
                             </ol>  
                         </c:if>
+                        --%>
                         <!-- Fin du menu -->  
 
                         <!-- Zone qui affiche les utilisateurs si le paramètre action vaut listerComptes -->  

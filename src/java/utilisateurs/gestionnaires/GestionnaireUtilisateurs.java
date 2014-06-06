@@ -52,6 +52,8 @@ public class GestionnaireUtilisateurs {
      */
     public Collection<Utilisateur> getAllUsers() {
         Query q = em.createQuery("select u from Utilisateur u Order by u.login");
+        this.setNbRows(q.getResultList().size());
+        this.applyRowsPagesUpdates();
         return q.getResultList();
     }
 
@@ -95,13 +97,12 @@ public class GestionnaireUtilisateurs {
         return q.getResultList();
     }
 
-    public void updateUser(int ID, String prenom, String nom, String login, String password) {
-        Query q = em.createQuery("update Utilisateur u set u.firstname=:nom, u.lastname=:prenom, u.password=:password, u.login=:login where u.id=:ID");
+    public void updateUser(String prenom, String nom, String login, String password) {
+        Query q = em.createQuery("update Utilisateur u set u.firstname=:nom, u.lastname=:prenom, u.password=:password where u.login=:login");
         q.setParameter("login", login);
         q.setParameter("nom", nom);
         q.setParameter("prenom", prenom);
         q.setParameter("password",password);
-        q.setParameter("ID", ID);
         q.executeUpdate();
     }
     

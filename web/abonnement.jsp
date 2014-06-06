@@ -34,7 +34,7 @@
         <c:import url="header.jsp"/>
 
         <c:if test="${!empty sessionScope.connecte}">
-            <div class="main clearfix">
+            <div>
                 <c:import url="content_abonnement.jsp"/>
             </div>
         </c:if>

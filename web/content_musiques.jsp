@@ -1,18 +1,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>  
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
-    "http://www.w3.org/TR/html4/loose.dtd">  
-
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 
-<div class="page-header-bg">
-    <a href="#" class="expand-icon"><i class="fa fa-expand"></i></a>
-    <div class="overlay"></div>
-    <img src="images/gallery/slides/slide2.jpg" alt="">
-    <div class="page-header-bg-content">
-        <h3>Musiques</h3>
+<div id="contact-page" class="container">
+    <div class="bg">
+        <div class="row">    		
+            <div class="col-sm-12">
+                <h3>Musiques</h3>
+            </div>
+        </div>
     </div>
-</div> 
-
+</div>
 <!--Recherche : <input id="filter" type="text" value="" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"/> -->
 
 <c:if test="${param['action'] == 'listeMusiques'}" >

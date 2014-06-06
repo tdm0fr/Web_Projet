@@ -1,20 +1,17 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>  
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
-    "http://www.w3.org/TR/html4/loose.dtd">  
-
-<!-- Ne pas oublier cette ligne sinon tous les tags de la JSTL seront ignorés ! -->  
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 
-<div class="page-header-bg">
-    <a href="#" class="expand-icon"><i class="fa fa-expand"></i></a>
-    <div class="overlay"></div>
-    <img src="images/gallery/slides/slide2.jpg" alt="">
-    <div class="page-header-bg-content">
-        <h3>Abonnez-vous !</h3>
+<div id="contact-page" class="container">
+    <div class="bg">
+        <div class="row">    		
+            <div class="col-sm-12">
+                <h3>Abonnez-vous !</h3>
+            </div>
+        </div>
     </div>
-</div>
-<div class="audio-player">
-</div>
+</div>        
+        
+
 <div class="content no-horizontal-padding">
     <div class="events">
         <div class="content no-horizontal-padding">

@@ -38,6 +38,11 @@ public class GestionnaireArtistes {
         return q.getResultList();
     }
     
+    public void addArtiste(String nom, String resume, String photoLink){
+        Artiste a = new Artiste(nom, resume, photoLink);
+        em.persist(a);
+    }
+    
     public Collection<Artiste> getAllArtistes() {
         Query q = em.createQuery("select a from Artiste a Order by a.nom");
         return q.getResultList();

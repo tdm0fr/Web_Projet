@@ -6,12 +6,12 @@
         <div class="row">    		
             <div class="col-sm-12">
 
-                <h1>Bienvenue</h1>
-                <p>MMP est une plateforme d'achat de musique à l'unité, ou par abonnement.</p>
+                <h1>Soyez la musique !</h1>
+                <p>The Sound est le site de musique qu'il vous faut</p>
 
-                <p>Pour en profiter :
-                    <a class="animated fadeInRight" href="index.jsp?action=inscription">Inscrivez-vous !</a>
-                    <a class="animated fadeInRight" href="index.jsp?action=connexion">Connectez-vous !</a>
+                <p>A vous de jouer !
+                    <a class="animated fadeInRight" href="index.jsp?action=inscription">Inscription</a>
+                    <a class="animated fadeInRight" href="index.jsp?action=connexion">Connexion</a>
                 </p>
 
             </div>

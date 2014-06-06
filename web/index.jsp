@@ -39,8 +39,8 @@
         <c:if test="${!empty sessionScope.connecte}"> 
             <c:import url="deconnexion.jsp"/>
             
-            <c:if test="${param['page'] == 'details'}">
-                <c:import url="details.jsp"/>
+            <c:if test="${param['page'] == 'utilisateurs'}">
+                <c:import url="utilisateurs.jsp"/>
             </c:if>
 
             <c:if test="${param['page'] == 'musiques'}">

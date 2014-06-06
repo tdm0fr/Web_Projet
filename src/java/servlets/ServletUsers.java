@@ -138,7 +138,7 @@ public class ServletUsers extends HttpServlet {
                 Collection<Utilisateur> liste = new ArrayList();
                 liste = gestionnaireUtilisateurs.getUserByLogin(request.getParameter("login"));
                 request.setAttribute("listeDesUsers", liste);
-                forwardTo = "index.jsp?action=chercherParLogin";
+                forwardTo = "index.jsp?page=utilisateurs&action=chercherParLogin";
                 message = "";
             } 
             else {

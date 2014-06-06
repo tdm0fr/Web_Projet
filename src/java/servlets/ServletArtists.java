@@ -87,7 +87,7 @@ public class ServletArtists extends HttpServlet {
 
     public void parser() {
         try {
-            InputStream ips = new FileInputStream("C:\\Users\\BRAINLAGARRRRR\\Documents\\NetBeansProjects\\Web_Projet\\src\\java\\servlets\\liste.txt");
+            InputStream ips = new FileInputStream("C:\\Users\\Franck\\Documents\\NetBeansProjects\\Web_Projet\\src\\java\\servlets\\liste.txt");
             InputStreamReader ipsr = new InputStreamReader(ips);
             BufferedReader br = new BufferedReader(ipsr);
             String ligne;
@@ -96,7 +96,7 @@ public class ServletArtists extends HttpServlet {
             while ((ligne = br.readLine()) != null) {
                 if (ligne.contains(";")) {
                     if (m != null) {
-                        gestionnaireMusiques.addMusique(ligne, 0, null, 0, null);
+                        gestionnaireMusiques.addMusique(ligne, 0, "", 0, "");
                     }
                     /*m = new Musique();
                     a = new Artiste();

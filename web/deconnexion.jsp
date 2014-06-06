@@ -6,7 +6,7 @@
         <div class="row">    		
             <div class="col-sm-12">
                 <h3>
-                    <span id="connect">Bonjour ${login}</span>
+                    <span id="connect">Bonjour <strong>${login}</strong></span>
                     <span style="float:right;"> <a id="deconnexion" href="ServletUsers?action=deconnexion">Déconnexion</a></span>
                 </h3>
             </div>

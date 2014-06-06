@@ -27,11 +27,11 @@ public class GestionnaireInstruments {
     private int nbPages;
     private int pageCourante = 1;
 
-//    public Instrument addInstrument(String nom, String difficulte) {
-//        Instrument i = new Instrument(nom, difficulte);
-//        em.persist(i);
-//        return i;
-//    }
+    public Instrument addInstrument(String nom, String difficulte) {
+        Instrument i = new Instrument(nom, difficulte);
+        em.persist(i);
+        return i;
+    }
 
     public Collection<Instrument> getInstrumentsParMusiqueID(int id) {
         Query q = em.createQuery("select i from Instrument i where i.musique.id=:id");

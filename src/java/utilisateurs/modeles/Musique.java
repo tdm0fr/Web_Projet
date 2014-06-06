@@ -32,8 +32,8 @@ public class Musique implements Serializable {
     private String genre;
     private int annee;
     private String wikiLink;
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private Album album;    
+//    @ManyToOne(cascade = CascadeType.PERSIST)
+//    private Album album;    
     
     public Musique() {
     }
@@ -118,13 +118,13 @@ public class Musique implements Serializable {
         this.wikiLink = wikiLink;
     }
 
-    public Album getAlbum() {
-        return album;
-    }
-
-    public void setAlbum(Album album) {
-        this.album = album;
-    }
+//    public Album getAlbum() {
+//        return album;
+//    }
+//
+//    public void setAlbum(Album album) {
+//        this.album = album;
+//    }
 
     @Override
     public int hashCode() {
@@ -148,6 +148,6 @@ public class Musique implements Serializable {
 
     @Override
     public String toString() {
-        return "Musique{" + "id=" + id + ", titre=" + titre + ", nbPistes=" + nbPistes + ", listeInstruments=" + listeInstruments + ", listeArtistes=" + listeArtistes + ", genre=" + genre + ", annee=" + annee + ", wikiLink=" + wikiLink + ", album=" + album + '}';
+        return "Musique{" + "id=" + id + ", titre=" + titre + ", nbPistes=" + nbPistes + ", listeInstruments=" + listeInstruments + ", listeArtistes=" + listeArtistes + ", genre=" + genre + ", annee=" + annee + ", wikiLink=" + wikiLink +'}';// ", album=" + album + '}';
     }
 }

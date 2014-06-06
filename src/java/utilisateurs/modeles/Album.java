@@ -29,8 +29,8 @@ public class Album implements Serializable {
     private String photoURL;
     private String resume;
     private String wikipediaURL;
-    @OneToMany(mappedBy = "album")
-    private Collection<Musique> listeMusiques;
+//    @OneToMany(mappedBy = "album")
+//    private Collection<Musique> listeMusiques;
     @ManyToMany
     private Collection<Artiste> listeArtistes;
 
@@ -84,17 +84,17 @@ public class Album implements Serializable {
         this.wikipediaURL = wikipediaURL;
     }
 
-    public Collection<Musique> getListeMusiques() {
-        return listeMusiques;
-    }
-
-    public void addMusique(Musique m) {  
-        listeMusiques.add(m);  
-    }
-        
-    public void removeMusique(Musique m) {  
-        listeMusiques.remove(m);  
-    }
+//    public Collection<Musique> getListeMusiques() {
+//        return listeMusiques;
+//    }
+//
+//    public void addMusique(Musique m) {  
+//        listeMusiques.add(m);  
+//    }
+//        
+//    public void removeMusique(Musique m) {  
+//        listeMusiques.remove(m);  
+//    }
 
     public Collection<Artiste> getListeArtistes() {
         return listeArtistes;
@@ -132,6 +132,6 @@ public class Album implements Serializable {
 
     @Override
     public String toString() {
-        return "Album{" + "id=" + id + ", nom=" + nom + ", photoURL=" + photoURL + ", resume=" + resume + ", wikipediaURL=" + wikipediaURL + ", listeMusiques=" + listeMusiques + '}';
+        return "Album{" + "id=" + id + ", nom=" + nom + ", photoURL=" + photoURL + ", resume=" + resume + ", wikipediaURL=" + wikipediaURL + '}';//", listeMusiques=" + listeMusiques + '}';
     }
 }

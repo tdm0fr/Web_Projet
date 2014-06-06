@@ -87,17 +87,17 @@ public class ServletArtists extends HttpServlet {
 
     public void parser() {
         try {
-            InputStream ips = new FileInputStream("C:\\Users\\Franck\\Documents\\NetBeansProjects\\Web_Projet\\src\\java\\servlets\\liste.txt");
+            InputStream ips = new FileInputStream("C:\\Users\\BRAINLAGARRRRR\\Documents\\NetBeansProjects\\M1_MIAGE_Web_Projet\\src\\java\\servlets\\liste.txt");
             InputStreamReader ipsr = new InputStreamReader(ips);
             BufferedReader br = new BufferedReader(ipsr);
             String ligne;
             Musique m = new Musique();
-            Artiste a = null;
+            Artiste a = new Artiste();
+            Instrument i = new Instrument();
             while ((ligne = br.readLine()) != null) {
                 if (ligne.contains(";")) {
-                    if (m != null) {
-                        gestionnaireMusiques.addMusique(ligne, 0, "", 0, "");
-                    }
+                    a.setNom(ligne.substring(0, ligne.length()-1));
+                }
                     /*m = new Musique();
                     a = new Artiste();
                     a.setNomArtiste(ligne.substring(0, ligne.length() - 1));
@@ -105,13 +105,11 @@ public class ServletArtists extends HttpServlet {
                     m.setTitre("nom");
                     System.out.println(a);*/
 
-                } else if (ligne.contains(":")) {
-                    m.setTitre(ligne.substring(0, ligne.length() - 1));
-
+                else if (ligne.contains(":")) {
+                    m.setTitre(ligne.substring(0, ligne.length()-1));
                 } else if (ligne.contains(".png")) {
                 } else if (ligne.contains(".mp3") || ligne.contains(".ogg") || ligne.contains(".mid") || ligne.contains(".mogg")) {
-                   System.out.println(ligne.substring(0, ligne.length()));
-                   System.out.println(m);
+                    
               //      gestionnaireInstrument.ajouterInstrument(m, ligne.substring(0, ligne.length() - 1));
                 }
             }

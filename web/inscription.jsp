@@ -19,7 +19,7 @@
                                     <label for="prenom">Prénom</label>
                                     <input type="text" name="prenom"/><br>  
 
-                                    <label for="loginConnexion">Mail</label>
+                                    <label for="loginConnexion">login</label>
                                     <input type="text" name="login"/><br>
 
                                     <label for="password">Mot de passe</label>

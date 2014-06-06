@@ -8,63 +8,56 @@ package utilisateurs.modeles;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author Medhy Salim
  */
 @Entity
-public class Artiste implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class Album implements Serializable {
+    private static final long serialVersionUID = 1L;  
+    @Id  
+    @GeneratedValue(strategy = GenerationType.AUTO)  
+    private int id;
     private String nom;
-    private String resume;
     private String photoURL;
-    @ManyToMany(mappedBy = "artiste")
+    private String resume;
+    private String wikipediaURL;
+    @OneToMany(mappedBy = "album")
     private Collection<Musique> listeMusiques;
-    @ManyToMany(mappedBy = "albums")
-    private Collection<Album> listeAlbums;
+    @ManyToMany
+    private Collection<Artiste> listeArtistes;
 
-    public Artiste() {
+    public Album() {
     }
 
-    public Artiste(String nom, String resume, String photoLink) {
+    public Album(String nom, String photoURL, String resume, String wikipediaURL) {
         this.nom = nom;
+        this.photoURL = photoURL;
         this.resume = resume;
-        this.photoURL = photoLink;
+        this.wikipediaURL = wikipediaURL;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
-
+    
     public String getNom() {
         return nom;
     }
 
     public void setNom(String nom) {
         this.nom = nom;
-    }
-
-    public String getResume() {
-        return resume;
-    }
-
-    public void setResume(String resume) {
-        this.resume = resume;
     }
 
     public String getPhotoURL() {
@@ -75,10 +68,26 @@ public class Artiste implements Serializable {
         this.photoURL = photoURL;
     }
 
+    public String getResume() {
+        return resume;
+    }
+
+    public void setResume(String resume) {
+        this.resume = resume;
+    }
+
+    public String getWikipediaURL() {
+        return wikipediaURL;
+    }
+
+    public void setWikipediaURL(String wikipediaURL) {
+        this.wikipediaURL = wikipediaURL;
+    }
+
     public Collection<Musique> getListeMusiques() {
         return listeMusiques;
     }
-    
+
     public void addMusique(Musique m) {  
         listeMusiques.add(m);  
     }
@@ -87,22 +96,22 @@ public class Artiste implements Serializable {
         listeMusiques.remove(m);  
     }
 
-    public Collection<Album> getListeAlbums() {
-        return listeAlbums;
+    public Collection<Artiste> getListeArtistes() {
+        return listeArtistes;
     }
     
-    public void addAlbum(Album a) {  
-        listeAlbums.add(a);  
+    public void addArtiste(Artiste a) {  
+        listeArtistes.add(a);  
     }
         
-    public void removeAlbum(Album a) {  
-        listeAlbums.remove(a);  
+    public void removeArtiste(Artiste a) {  
+        listeArtistes.remove(a);  
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.id);
+        hash = 41 * hash + this.id;
         return hash;
     }
 
@@ -114,8 +123,8 @@ public class Artiste implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Artiste other = (Artiste) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        final Album other = (Album) obj;
+        if (this.id != other.id) {
             return false;
         }
         return true;
@@ -123,6 +132,6 @@ public class Artiste implements Serializable {
 
     @Override
     public String toString() {
-        return "Artiste{" + "id=" + id + ", nom=" + nom + ", resume=" + resume + ", photoURL=" + photoURL + '}';
+        return "Album{" + "id=" + id + ", nom=" + nom + ", photoURL=" + photoURL + ", resume=" + resume + ", wikipediaURL=" + wikipediaURL + ", listeMusiques=" + listeMusiques + '}';
     }
 }

@@ -1,17 +1,21 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package utilisateurs.gestionnaires;
 
-import java.sql.Timestamp;
 import java.util.Collection;
-import java.util.List;
-import java.util.Random;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import utilisateurs.modeles.Adresse;
-import utilisateurs.modeles.Musique;
 import utilisateurs.modeles.Utilisateur;
+
+/**
+ *
+ * @author Franck Munier
+ */
 
 @Stateless
 public class GestionnaireUtilisateurs {
@@ -20,22 +24,21 @@ public class GestionnaireUtilisateurs {
     // "Insert Code > Add Business Method")
     @PersistenceContext
     private EntityManager em;
-    private int firstRow = 0;
-    private int rowsPerPage = 10;
-    private int totalRows;
-    private int totalPages;
+    private int rowOne = 0;
+    private int nbRowsByPage = 10;
+    private int nbRows;
+    private int nbPages;
     private int currentPage = 1;
 
-    public Collection<Utilisateur> getUsersbyPage(int pageNumber) {
+    public Collection<Utilisateur> getUsersByPage(int pageID) {
+
         Query q = em.createQuery("select u from Utilisateur u Order by u.login");
-        this.setTotalRows(q.getResultList().size());
-        if (this.totalRows % this.rowsPerPage == 0) {
-            this.totalPages = this.totalRows / this.rowsPerPage;
-        } else {
-            this.totalPages = this.totalRows / this.rowsPerPage + 1;
-        }
-        q.setMaxResults(this.rowsPerPage);
-        q.setFirstResult((pageNumber - 1) * this.rowsPerPage);
+
+        this.setNbRows(q.getResultList().size());
+        this.applyRowsPagesUpdates();
+
+        q.setFirstResult((pageID - 1) * this.nbRowsByPage);
+        q.setMaxResults(this.nbRowsByPage);
 
         return q.getResultList();
     }
@@ -47,119 +50,94 @@ public class GestionnaireUtilisateurs {
      */
     public Collection<Utilisateur> getAllUsers() {
         Query q = em.createQuery("select u from Utilisateur u Order by u.login");
-        this.setTotalRows(q.getResultList().size());
-        if (this.totalRows % rowsPerPage == 0) {
-            this.totalPages = this.totalRows / this.rowsPerPage;
-        } else {
-            this.totalPages = this.totalRows / this.rowsPerPage + 1;
-        }
         return q.getResultList();
+    }
+
+    /**
+     * applyRowsPagesUpdates : modifie les attributs en fonction du nombre
+     * d'utilisateurs
+     */
+    public void applyRowsPagesUpdates() {
+        if (this.nbRows % nbRowsByPage == 0) {
+            this.nbPages = this.nbRows / this.nbRowsByPage;
+        } else {
+            this.nbPages = this.nbRows / this.nbRowsByPage + 1;
+        }
     }
 
     /**
      * creerUtilisateursDeTest : génère un nombre donné d'utilisateurs
      */
     public void creerUtilisateursDeTest() {
-
-        Adresse biot = new Adresse("Biot", "06410");
-        em.persist(biot);
-        Adresse valbonne = new Adresse("Valbonne", "06560");
-        em.persist(valbonne);
-        Adresse nice = new Adresse("Nice", "06000");
-        em.persist(nice);
-
-        Utilisateur john = inscription("John", "Lennon", "jlennon", "", biot);
-        Utilisateur paul = inscription("Paul", "Mac Cartney", "pmc", "", biot);
-
-        Utilisateur ringo = inscription("Ringo", "Starr", "rstarr", "", nice);
-        Utilisateur georges = inscription("Georges", "Harisson", "georgesH", "", valbonne);
-
-        //generateUsersWithQuantity(30);
+        createUser("Medhy", "Salim", "admin", "admin");
     }
 
-    public String randomString() {
-        char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-        StringBuilder sb = new StringBuilder();
-        Random randomStr = new Random();
-        int randomNum = 3 + (int) (Math.random() * 20);
-        for (int i = 0; i < randomNum; i++) {
-            char c = chars[randomStr.nextInt(chars.length)];
-            sb.append(c);
-        }
-        return sb.toString();
-    }
-
-//    public void generateUsersWithQuantity(int quantity)
-//    {
-//        for(int i = 0; i < quantity; i++)
-//        {
-//            inscription(this.randomString(),this.randomString(),""+i, "", biot);
-//        }
-//    }
-    public Utilisateur inscription(String nom, String prenom, String login, String password, Adresse a) {
-        Utilisateur u = new Utilisateur(nom, prenom, login, password);
-        // On met à jour la relation, elle est déjà en base  
-        u.setAdresse(a);
-        a.addUtilisateur(u);
+    public Utilisateur createUser(String lastname, String firstname, String login, String password) {
+        Utilisateur u = new Utilisateur(lastname, firstname, login, password);
         em.persist(u);
-
         return u;
     }
-    public void ajouterMusique(Musique m) {
-        em.persist(m);
-    }
-    public void deleteUtilisateur(String login) {
-        Query q = em.createQuery("delete from Utilisateur u where u.login='" + login + "'");
+
+    public void addAbonnementToUser(int userID, int abonnementID) {
+        Utilisateur u = em.find(Utilisateur.class, userID);
+        Query q = em.createQuery("update Utilisateur u set u.abonnement=:abonnementID where u.id=:userID");
+        q.setParameter("abonnementID", abonnementID);
+        q.setParameter("userID", userID);
         q.executeUpdate();
     }
-
-    public Collection<Utilisateur> showUsersByLogin(String login) {
-        Query q = em.createQuery("select u from Utilisateur u where u.login='" + login + "'");
+    
+    public Collection<Utilisateur> getUserByLogin(String login) {
+        // Exécution d'une requête équivalente à un select *
+        Query q = em.createQuery("select u from Utilisateur u where u.login=:login");
+        q.setParameter("login", login);
         return q.getResultList();
     }
 
-    
-    public void modifieUtilisateur(String firstname, String lastname, String login, Adresse adresse, Timestamp abonnement) {
-        Query q = em.createQuery("select u from Utilisateur u where u.login = :login");
+    public void updateUser(int ID, String prenom, String nom, String login, String password) {
+        Query q = em.createQuery("update Utilisateur u set u.firstname=:nom, u.lastname=:prenom, u.password=:password, u.login=:login where u.id=:ID");
         q.setParameter("login", login);
-        List<Utilisateur> users = q.getResultList();
-        Utilisateur u = users.get(0); 
-        u.setFirstname(firstname);
-        u.setLastname(lastname);
-        u.setAdresse(adresse);
-        u.setAbonnement(abonnement);
-             
-        em.merge(u);
+        q.setParameter("nom", nom);
+        q.setParameter("prenom", prenom);
+        q.setParameter("password",password);
+        q.setParameter("ID", ID);
+        q.executeUpdate();
     }
     
 
-    public Utilisateur getUserByLogin(String login) {
-        Query q = em.createQuery("select u from Utilisateur u where u.login ='" + login + "'").setMaxResults(1);
-        Utilisateur u1 = null;
-        try {
-            u1 = (Utilisateur) q.getSingleResult();
-        } catch (NoResultException e) {
-            u1 = null;
+    public void deleteUser(String login) {
+        // Exécution d'une requête équivalente à un select *
+        Query q = em.createQuery("delete from Utilisateur u where u.login=:login");
+        q.setParameter("login", login);
+        q.executeUpdate();
+    }
+
+    public void deleteAllUsers(Collection<Utilisateur> liste) {
+        // Exécution d'une requête équivalente à un select *
+        String login = null;
+        for (Utilisateur u : liste) {
+            login = u.getLogin();
+            Query q = em.createQuery("delete from Utilisateur u where u.login=:login");
+            q.setParameter("login", login);
+            q.executeUpdate();
         }
-        return u1;
     }
 
     // --- Getters
     //
-    public int getFirstRow() {
-        return firstRow;
+    public int getRowOne() {
+        return rowOne;
     }
 
-    public int getRowsPerPage() {
-        return rowsPerPage;
+    public int getNbRowsByPage() {
+        return nbRowsByPage;
     }
 
-    public int getTotalRows() {
-        return totalRows;
+    public int getNbRows() {
+        return nbRows;
     }
 
-    public int getTotalPages() {
-        return totalPages;
+    public int getNbPages() {
+        return nbPages;
     }
 
     public int getCurrentPage() {
@@ -168,31 +146,24 @@ public class GestionnaireUtilisateurs {
 
     // --- Setters
     //
-    public void setFirstRow(int firstRow) {
-        this.firstRow = firstRow;
+    public void setRowOne(int rowOne) {
+        this.rowOne = rowOne;
     }
 
-    public void setRowsPerPage(int rowsPerPage) {
-        this.rowsPerPage = rowsPerPage;
+    public void setNbRowsByPage(int nbRowsByPage) {
+        this.nbRowsByPage = nbRowsByPage;
     }
 
-    public void setTotalRows(int totalRows) {
-        this.totalRows = totalRows;
+    public void setNbRows(int nbRows) {
+        this.nbRows = nbRows;
     }
 
-    public void setTotalPages(int totalPages) {
-        this.totalPages = totalPages;
+    public void setNbPages(int nbPages) {
+        this.nbPages = nbPages;
     }
 
     public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
-    }
-
-    public Collection<Utilisateur> getUsersParVille(int idVille) {
-        Adresse a = em.find(Adresse.class, idVille);
-
-        // a est connecté, le get va déclencher un select  
-        return a.getUtilisateurs();
     }
 
 }

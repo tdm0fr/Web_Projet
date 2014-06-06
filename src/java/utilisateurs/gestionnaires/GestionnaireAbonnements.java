@@ -6,37 +6,30 @@
 package utilisateurs.gestionnaires;
 
 import java.util.Collection;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import utilisateurs.modeles.Artiste;
+import utilisateurs.modeles.Abonnement;
 
 /**
  *
- * @author naana_on
+ * @author Medhy Salim
  */
 @Stateless
-public class GestionnaireArtiste {
+public class GestionnaireAbonnements {
 
     @PersistenceContext
     private EntityManager em;
 
-    public Artiste ajouterArtiste(String nomArtiste) {
-        Artiste a = new Artiste(nomArtiste);
-        em.persist(a);
-        return a;
-    }
-
-    public Collection<Artiste> getAllArtists() { 
-        Query q = em.createQuery("select a from Artiste a");
-        return q.getResultList();
-    }
-
-    public Collection<Artiste> showArtistsByName(String nom) {
-        Query q = em.createQuery("select a from Artiste a where a.nomArtiste='" + nom + "'");
+    public Collection<Abonnement> getAllAbonnements() {
+        Query q = em.createQuery("select a from Abonnement a Order by a.prix");
         return q.getResultList();
     }
     
+    public Collection<Abonnement> getAbonnementByID(int ID) {
+        Query q = em.createQuery("select a from Abonnement a where a.id=:id");
+        q.setParameter("id", ID);
+        return q.getResultList();
+    }
 }

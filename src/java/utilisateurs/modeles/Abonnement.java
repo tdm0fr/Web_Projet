@@ -6,7 +6,6 @@
 
 package utilisateurs.modeles;
 
-import com.sun.istack.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.persistence.Entity;
@@ -14,33 +13,28 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 /**
  *
  * @author Medhy Salim
  */
-@Entity  
-public class Adresse implements Serializable {  
- 
+@Entity
+public class Abonnement implements Serializable {
     private static final long serialVersionUID = 1L;  
     @Id  
     @GeneratedValue(strategy = GenerationType.AUTO)  
-    private int id;  
-    @NotNull @Size(min=1)  
-    private String ville;  
-    @Pattern(regexp="[0-9]{5}") // On accepte les codes postaux du type "06410"  
-    private String codePostal;
-    @OneToMany(mappedBy = "adresse")
+    private int id;
+    private int duree;
+    private int prix;
+    @OneToMany(mappedBy = "abonnement")
     private ArrayList<Utilisateur> listeUtilisateurs = new ArrayList<>();
 
-    public Adresse() {
-    }  
+    public Abonnement() {
+    }
 
-    public Adresse(String ville, String codePostal) {  
-        this.ville = ville;  
-        this.codePostal = codePostal;  
+    public Abonnement(int duree, int prix) {
+        this.duree = duree;
+        this.prix = prix;
     }
 
     public int getId() {
@@ -51,26 +45,26 @@ public class Adresse implements Serializable {
         this.id = id;
     }
 
-    public String getVille() {
-        return ville;
+    public int getDuree() {
+        return duree;
     }
 
-    public void setVille(String ville) {
-        this.ville = ville;
+    public void setDuree(int duree) {
+        this.duree = duree;
     }
 
-    public String getCodePostal() {
-        return codePostal;
+    public int getPrix() {
+        return prix;
     }
 
-    public void setCodePostal(String codePostal) {
-        this.codePostal = codePostal;
+    public void setPrix(int prix) {
+        this.prix = prix;
     }
 
     public ArrayList<Utilisateur> getListeUtilisateurs() {
         return listeUtilisateurs;
     }
-    
+
     public void addUtilisateur(Utilisateur u) {  
         listeUtilisateurs.add(u);  
     }
@@ -81,8 +75,8 @@ public class Adresse implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 31 * hash + this.id;
+        int hash = 3;
+        hash = 59 * hash + this.id;
         return hash;
     }
 
@@ -94,7 +88,7 @@ public class Adresse implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Adresse other = (Adresse) obj;
+        final Abonnement other = (Abonnement) obj;
         if (this.id != other.id) {
             return false;
         }
@@ -103,6 +97,6 @@ public class Adresse implements Serializable {
 
     @Override
     public String toString() {
-        return "Adresse{" + "id=" + id + ", ville=" + ville + ", codePostal=" + codePostal + ", listeUtilisateurs=" + listeUtilisateurs + '}';
+        return "Abonnement{" + "id=" + id + ", duree=" + duree + ", prix=" + prix + ", listeUtilisateurs=" + listeUtilisateurs + '}';
     }
 }

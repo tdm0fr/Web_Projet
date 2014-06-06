@@ -10,6 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+/**
+ *
+ * @author Medhy Salim
+ */
+
 @Entity
 public class Musique implements Serializable {
 
@@ -19,46 +24,32 @@ public class Musique implements Serializable {
     private Long id;
     private String titre;
     private int nbPistes;
-    private String annee;
-    private String urlWiki;
-
-    @OneToMany(cascade = CascadeType.PERSIST)
-    private Collection<Instrument> instruments;
-
+    @OneToMany(mappedBy = "musique")
+    private Collection<Instrument> listeInstruments;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Artiste artiste;
-
-    public Collection<Instrument> getInstruments() {
-        return instruments;
-    }
-
-    public Artiste getArtiste() {
-        return artiste;
-    }
-
-    public void setArtiste(Artiste artiste) {
-        this.artiste = artiste;
-    }
-
-    public void setInstruments(Collection<Instrument> instruments) {
-        this.instruments = instruments;
-    }
-
+    private String genre;
+    private int annee;
+    private String wikiLink;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private String album;    
+    
     public Musique() {
     }
 
-    public Musique(final String titre, final int nbPistes, final String annee, final String urlWiki) {
+    public Musique(String titre, int nbPistes, String genre, int annee, String wikiLink) {
         this.titre = titre;
         this.nbPistes = nbPistes;
+        this.genre = genre;
         this.annee = annee;
-        this.urlWiki = urlWiki;
+        this.wikiLink = wikiLink;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -78,20 +69,56 @@ public class Musique implements Serializable {
         this.nbPistes = nbPistes;
     }
 
-    public String getAnnee() {
+    public Collection<Instrument> getListeInstruments() {
+        return listeInstruments;
+    }
+
+    public void addInstrument(Instrument i) {  
+        listeInstruments.add(i);  
+    }
+        
+    public void removeInstrument(Instrument i) {  
+        listeInstruments.remove(i);  
+    }
+    
+    public Artiste getArtiste() {
+        return artiste;
+    }
+
+    public void setArtiste(Artiste artiste) {
+        this.artiste = artiste;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public int getAnnee() {
         return annee;
     }
 
-    public void setAnnee(String annee) {
+    public void setAnnee(int annee) {
         this.annee = annee;
     }
 
-    public String getUrlWiki() {
-        return urlWiki;
+    public String getWikiLink() {
+        return wikiLink;
     }
 
-    public void setUrlWiki(String urlWiki) {
-        this.urlWiki = urlWiki;
+    public void setWikiLink(String wikiLink) {
+        this.wikiLink = wikiLink;
+    }
+
+    public String getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(String album) {
+        this.album = album;
     }
 
     @Override
@@ -116,7 +143,6 @@ public class Musique implements Serializable {
 
     @Override
     public String toString() {
-        return "utilisateurs.modeles.Musique[ id=" + id + titre + " ]";
+        return "Musique{" + "id=" + id + ", titre=" + titre + ", nbPistes=" + nbPistes + ", listeInstruments=" + listeInstruments + ", artiste=" + artiste + ", genre=" + genre + ", annee=" + annee + ", wikiLink=" + wikiLink + ", album=" + album + '}';
     }
-
 }

@@ -57,7 +57,6 @@ public class ServletArtists extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        String page = request.getParameter("page");
         String forwardTo = "";
         String message = "";
 
@@ -65,9 +64,9 @@ public class ServletArtists extends HttpServlet {
             if (action.equals("listeMusiques")) {
                 Collection<Musique> liste = gestionnaireMusiques.getAllMusiques();
                 request.setAttribute("listeMusiques", liste);
-                forwardTo = "musiques.jsp?action=listeMusiques";
+                forwardTo = "index.jsp?page=musiques&action=listeMusiques";
             } else if (action.equals("listeArtistes")) {
-                Collection<Artiste> liste = gestionnaireArtiste.getAllArtists();
+                Collection<Artiste> liste = gestionnaireArtiste.getAllArtistes();
                 request.setAttribute("listeArtistes", liste);
                 forwardTo = "musiques.jsp?action=listeArtistes";
             } 
@@ -75,9 +74,9 @@ public class ServletArtists extends HttpServlet {
                 int idmusique;
                 idmusique = Integer.parseInt(request.getParameter("id"));
                 System.out.println(idmusique);
-                Collection<Instrument> liste = gestionnaireInstrument.getInstrumentParMusique(idmusique);
+                Collection<Instrument> liste = gestionnaireInstrument.getInstrumentsParMusiqueID(idmusique);
 //                   System.out.println(liste);
-//               request.setAttribute("detailsMusique", liste);
+                     request.setAttribute("detailsMusique", liste);
             } 
 
         }
@@ -92,21 +91,19 @@ public class ServletArtists extends HttpServlet {
             InputStreamReader ipsr = new InputStreamReader(ips);
             BufferedReader br = new BufferedReader(ipsr);
             String ligne;
-            Musique m = null;
+            Musique m = new Musique();
             Artiste a = null;
             while ((ligne = br.readLine()) != null) {
-
                 if (ligne.contains(";")) {
                     if (m != null) {
-                        gestionnaireMusiques.ajouterMusique(m);
+                        gestionnaireMusiques.addMusique(ligne, 0, null, 0, null);
                     }
-                    m = new Musique();
-                    
+                    /*m = new Musique();
                     a = new Artiste();
                     a.setNomArtiste(ligne.substring(0, ligne.length() - 1));
                     m.setArtiste(a);
                     m.setTitre("nom");
-                    System.out.println(a);
+                    System.out.println(a);*/
 
                 } else if (ligne.contains(":")) {
                     m.setTitre(ligne.substring(0, ligne.length() - 1));

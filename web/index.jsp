@@ -42,6 +42,10 @@
             <c:if test="${param['page'] == 'utilisateurs'}">
                 <c:import url="utilisateurs.jsp"/>
             </c:if>
+            
+            <c:if test="${param['page'] == 'abonnement'}">
+                <c:import url="abonnement.jsp"/>
+            </c:if>
         </c:if>
         
         <%-- Si on est pas connecté --%>

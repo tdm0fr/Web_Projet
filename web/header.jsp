@@ -15,7 +15,7 @@
                                         <nav class="navbar-right collapse navbar-collapse">
                                             <ul class="nav navbar-nav">
                                                 <li class="active"><a data-hover="Accueil" href="index.jsp?action=">Accueil</a></li>
-                                                <li><a data-hover="Abonnement" href="ServletUsers?action=">Abonnement</a></li>                    
+                                                <li><a data-hover="Abonnement" href="index.jsp?page=abonnement">Abonnement</a></li>                    
                                                 <li><a data-hover="Utilisateurs" href="index.jsp?page=utilisateurs">Utilisateurs</a></li>
                                                 <li><a data-hover="Musiques" href="ServletArtists?action=listeMusiques">Musiques</a></li>
                                                 <li><a data-hover="Artistes" href="ServletArtists?action=listeArtistes">Artistes</a></li>

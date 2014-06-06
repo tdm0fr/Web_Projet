@@ -2,6 +2,7 @@ package utilisateurs.modeles;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,10 +26,10 @@ public class Musique implements Serializable {
     private Long id;
     private String titre;
     private int nbPistes;
-    @OneToMany(mappedBy = "musique")
-    private Collection<Instrument> listeInstruments;
-    @ManyToMany
-    private Collection<Artiste> listeArtistes;
+//    @OneToMany(mappedBy = "musique")
+//    private Collection<Instrument> listeInstruments;
+//    @ManyToMany
+//    private Collection<Artiste> listeArtistes;
     private String genre;
     private int annee;
     private String wikiLink;
@@ -70,29 +71,29 @@ public class Musique implements Serializable {
         this.nbPistes = nbPistes;
     }
 
-    public Collection<Instrument> getListeInstruments() {
-        return listeInstruments;
-    }
-
-    public void addInstrument(Instrument i) {  
-        listeInstruments.add(i);  
-    }
-        
-    public void removeInstrument(Instrument i) {  
-        listeInstruments.remove(i);  
-    }
-
-    public Collection<Artiste> getListeArtistes() {
-        return listeArtistes;
-    }
-    
-    public void addArtiste(Artiste a) {  
-        listeArtistes.add(a);  
-    }
-        
-    public void removeArtiste(Artiste a) {  
-        listeArtistes.remove(a);  
-    }
+//    public Collection<Instrument> getListeInstruments() {
+//        return listeInstruments;
+//    }
+//
+//    public void addInstrument(Instrument i) {  
+//        listeInstruments.add(i);  
+//    }
+//        
+//    public void removeInstrument(Instrument i) {  
+//        listeInstruments.remove(i);  
+//    }
+//
+//    public Collection<Artiste> getListeArtistes() {
+//        return listeArtistes;
+//    }
+//    
+//    public void addArtiste(Artiste a) {  
+//        listeArtistes.add(a);  
+//    }
+//        
+//    public void removeArtiste(Artiste a) {  
+//        listeArtistes.remove(a);  
+//    }
 
     public String getGenre() {
         return genre;
@@ -125,29 +126,32 @@ public class Musique implements Serializable {
 //    public void setAlbum(Album album) {
 //        this.album = album;
 //    }
-
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (long) id;
+        int hash = 5;
+        hash = 79 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Musique)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        Musique other = (Musique) object;
-        if (this.id != other.id) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Musique other = (Musique) obj;
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
     }
 
+
+
     @Override
     public String toString() {
-        return "Musique{" + "id=" + id + ", titre=" + titre + ", nbPistes=" + nbPistes + ", listeInstruments=" + listeInstruments + ", listeArtistes=" + listeArtistes + ", genre=" + genre + ", annee=" + annee + ", wikiLink=" + wikiLink +'}';// ", album=" + album + '}';
+        return "Musique{" + "id=" + id + ", titre=" + titre + ", nbPistes=" + nbPistes + ",  genre=" + genre + ", annee=" + annee + ", wikiLink=" + wikiLink +'}';// ", album=" + album + '}'; listeInstruments=" + listeInstruments + ", listeArtistes=" + listeArtistes + ",
     }
 }

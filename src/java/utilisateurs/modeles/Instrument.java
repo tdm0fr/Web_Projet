@@ -28,8 +28,8 @@ public class Instrument implements Serializable {
     private Long id;
     private String nom;
     private String difficulte;
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private Musique musique;
+//    @ManyToOne(cascade = CascadeType.PERSIST)
+//    private Musique musique;
 
     public Instrument() {
     }
@@ -63,13 +63,13 @@ public class Instrument implements Serializable {
         this.difficulte = difficulte;
     }
 
-    public Musique getMusique() {
-        return musique;
-    }
-
-    public void setMusique(Musique musique) {
-        this.musique = musique;
-    }
+//    public Musique getMusique() {
+//        return musique;
+//    }
+//
+//    public void setMusique(Musique musique) {
+//        this.musique = musique;
+//    }
 
     @Override
     public int hashCode() {
@@ -93,6 +93,6 @@ public class Instrument implements Serializable {
     
     @Override
     public String toString() {
-        return "Instrument{" + "id=" + id + ", nom=" + nom + ", difficulte=" + difficulte + ", musique=" + musique + '}';
+        return "Instrument{" + "id=" + id + ", nom=" + nom + ", difficulte=" + difficulte + '}';//", musique=" + musique + '}';
     }
 }

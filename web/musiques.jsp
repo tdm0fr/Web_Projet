@@ -32,87 +32,31 @@
     </div>
 </c:if>
 
-<%--
-                        <div class="button">
-                            <a>
-                                <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-                                    <input type='hidden' value="0.99" name="amount" />
-                                    <input name="currency_code" type="hidden" value="EUR" />
-                                    <input name="shipping" type="hidden" value="0.00" />
-                                    <input name="tax" type="hidden" value="0.00" />
-                                    <input name="return" type="hidden" value="http://localhost:8080/TP2_Web/success.jsp" />
-                                    <input name="cancel_return" type="hidden" value="http://localhost:8080/TP2_Web/cancelled.jsp" />
-                                    <input name="notify_url" type="hidden" value="" />
-                                    <input name="cmd" type="hidden" value="_xclick" />
-                                    <input name="business" type="hidden" value="grinny_vendeur@mmp.com" />
-                                    <input name="item_name" type="hidden" value="AbonnementWE" />
-                                    <input name="no_note" type="hidden" value="1" />
-                                    <input name="lc" type="hidden" value="FR" />
-                                    <input name="bn" type="hidden" value="PP-BuyNowBF" />
-                                    <input name="custom" type="hidden" value="grinny_acheteur@mmp.com" />
-                                    <input alt="Effectuez vos paiements via PayPal : une solution rapide, gratuite et sécurisée" name="submit" src="https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif" type="image" /><img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
-                                </form>
-                            </a>
-                        </div>
-
-                   </c:forEach>
-                   </div>
-               </c:if>
-            </div>
-        </div>
-    </div>
-</div>
---%>
-                <c:if test="${param['action'] == 'listeArtistes'}" >
-                    <div class="content">
-                        <div class="container-fluid no-horizontal-padding">
-                            <div class="articles albums">
-                                <div class="row">
-                                    <c:forEach var="a" items="${requestScope['listeArtistes']}">
-                                        <div class="col-md-3 article">
-                                            <a href="">
-                                                <div class="image">
-                                                    <div class="overlay">
-                                                        <h5>View Details</h5>
-                                                    </div>
-                                                    <img src="images/gallery/thumbnails/1.jpg" alt="">
-                                                </div>
-                                            </a>
-                                            <h3 class="title"><a href="">${a.nomArtiste}</a></h3>
+<c:if test="${param['action'] == 'listeArtistes'}" >
+    <div id="album">
+        <div class="container">
+            <div class="album-inner">               
+                <div class="row">                    
+                    <div class="col-sm-12 col-md-8">
+                        <div class="bg">
+                            <h2 class="heading">Artistes</h2>
+                            <div class="row">
+                                <c:forEach var="m" items="${requestScope['listeArtistes']}">
+                                    <div class="col-sm-4">
+                                        <div class="single-album">
+                                            <img src="images/album/album1.jpg" alt="">
+                                            <div class="album-heading">
+                                               <h3 class="title"><a href="">${a.nom}</a></h3>
+                                                
+                                            </div>
                                         </div>
-                                    </c:forEach>
-                                </div>
+                                    </div>
+                                </c:forEach>
                             </div>
                         </div>
-                    </div>
-                </c:if>
-
-                <c:if test="${param['action'] == 'detailsMusique'}" >
-
-                    <c:forEach var="a" items="${requestScope['listeInstruments']}">
-                        ${a.nomInstrument}
-                    </c:forEach>
-
-                </c:if>
-
-                <!-- <script> //Script pour la recherche dynamique dans la liste
-                    jQuery.expr[':'].contains = function(a, i, m) {
-                        return jQuery(a).text().toUpperCase()
-                                .indexOf(m[3].toUpperCase()) >= 0;
-                    };
-                    $(document).ready(function() {
-                        $("#filter").focus();
-                        $("#filter").keyup(function() {
-                            str = $(this).val();
-                            if (str == '')
-                                $('div.event div.container div.event_content').css('display', '');
-                            $('div.event div.container div.event_content').css('display', 'none');
-                            $('div.event div.container div.event_content div.title a:contains("' + str + '")').parent().css('display', '');
-                            $('div.event div.container div.event_content div.title div.location span:contains("' + str + '")').parent().css('display', '');
-                        });
-                    });
-                </script> -->
+                    </div>                          
+                </div>
             </div>
         </div>
     </div>
-</div>
+</c:if>
